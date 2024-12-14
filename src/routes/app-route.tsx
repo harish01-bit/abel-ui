@@ -1,15 +1,20 @@
 import { useRoutes } from "react-router-dom";
-import ChatPage from "../pages/chat";
+import ChatPage from "../pages/chat/chat";
 import React, { useState } from 'react';
+import { LoginPage } from "../pages/login/login";
 
 
-function AppRoute()  {
+function AppRoute() {
     return useRoutes([
         {
-            path: '/',
-            element: <ChatPage/>,
-          },
-
+            path: '/login',
+            index:true,
+            element: <LoginPage />,
+        },
+        {
+            path: '/chat',
+            element: <ChatPage />,
+        },
     ])
 }
-export default AppRoute ;
+export default AppRoute;

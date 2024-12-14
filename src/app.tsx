@@ -1,14 +1,44 @@
-import { QueryClient, QueryClientProvider } from "react-query";
+
 import AppRoute from "./routes/app-route";
 
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";
+import { useAppconfig } from "./helpers/app-config.service";
+import { useLoadAppConfig } from "./hooks/useLoadAppConfig";
+import { useEffect } from "react";
+import { AuthenticationService } from "./helpers/authetication.service";
+import useInactivityLogout from "./hooks/useInactivityLogOut";
 
-const queryClient = new QueryClient();
+export function SessionChk({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate()
+  useInactivityLogout(AuthenticationService.userLogout, 20 * 60 * 1000);
+  useEffect(() => {
+
+    if (AuthenticationService.chkUserLogin()) {
+      navigate("/chat");
+    }
+    else {
+      navigate("/login");
+    }
+
+
+  }, [])
+  return <> {children}</>
+}
 export function App() {
+  const loadConfigState = useLoadAppConfig('/config.json');
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppRoute/>
-    </QueryClientProvider>
+
+    loadConfigState && loadConfigState.status === 'success' ? (
+      <div className="app-container">
+        <SessionChk>
+          <AppRoute />
+        </SessionChk>
+
+
+      </div>
+    ) : <span>loading</span>
+
   );
 }
 
