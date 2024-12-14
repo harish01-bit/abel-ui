@@ -1,12 +1,12 @@
 import { AppConfigUtil } from "../../helpers/app-config-util";
 import { AuthenticationService } from "../../helpers/authetication.service";
 
-export class ChatApiService {
-    SendMessageRequest = async (request: any) => {
+export class LoginApiService {
+    AutheticateUser = async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            console.log(baseUrl)
-            const res = await fetch(baseUrl + "Client/ProcessClientQuery", {
+          
+            const res = await fetch(baseUrl + "User/Autheticate", {
                 method: 'post',
                 headers:AuthenticationService.getRequestHeaders(),
                 body: JSON.stringify(request)
@@ -25,26 +25,27 @@ export class ChatApiService {
             return null
         }
     };
-
-    PollForResponse = async (request: any) => {
+    RefreshToken = async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            const res = await fetch(baseUrl + "Client/GetClientQuery", {
+       
+            const res = await fetch(baseUrl + "User/RefreshToken", {
                 method: 'post',
                 headers: AuthenticationService.getRequestHeaders(),
                 body: JSON.stringify(request)
             });
             const data = await res.json();
-            if (data.isSuccess && data.clientQueryModel) {
+            if (data.isSuccess) {
+
                 return data;
+
             }
             else {
                 return null;
             }
         } catch (ex) {
-            console.log(ex);
+            console.log(ex)
+            return null
         }
     };
-
-
 }
