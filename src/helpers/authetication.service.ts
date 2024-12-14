@@ -8,11 +8,10 @@ import { clearUserDetails, getLocalStorage } from "./util.service"
  */
 export class AuthenticationService {
 
-    static navigte = useNavigate();
     public static userLogout = () => {
         clearUserDetails();
 
-        this.navigte("/login");
+      
     }
     public static chkUserLogin = () => {
 
