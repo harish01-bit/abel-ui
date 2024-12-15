@@ -39,7 +39,7 @@ function AuthHeaderComponent() {
                                 onClick={logOut}
                                 className="tyn-appbar-link dropdown-toggle"
                                 data-bs-toggle="dropdown"
-                                href="#"
+                             
                                 data-bs-offset="0,10"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-power" viewBox="0 0 16 16">

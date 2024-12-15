@@ -3,13 +3,13 @@ import { ChatApiService } from "../../middleware/services/chat-api.service";
 import { useGetLatestQueryListMutate, usePollResponsetate, useSendMessageMutate } from "../../middleware/hooks/useChatApi";
 import { AuthenticationService } from "../../helpers/authetication.service";
 
-export const useChatWindow = () => {
+export const useChatWindow = ({querMasterID,setQueryMasterID}:any) => {
 
     const [messages, setMessages] = useState<Array<any>>([]);
     const [input, setInput] = useState("");
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
     const service = new ChatApiService();
-    const [querMasterID, setQueryMasterID] = useState<number>(0);
+   
     const pollingInterval = 1000; // 1 second
     const pollingDuration = 5 * 60 * 1000; // 5 minutes
     const [curretUser, setCurretUser] = useState<any>({ ...AuthenticationService.currentUser }); // Load user state
@@ -74,6 +74,12 @@ export const useChatWindow = () => {
         }
 
     }, [curretUser?.userID, getLatestUserQueryList])
+    useEffect(()=>{
+        if(querMasterID==0){
+            setMessages([])
+        }
+
+    },[querMasterID])
     const appendMessage = (message: string, sender: string) => {
 
 
