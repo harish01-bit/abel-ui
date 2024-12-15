@@ -8,17 +8,24 @@ import { clearUserDetails, getLocalStorage } from "./util.service"
  */
 export class AuthenticationService {
 
+    public static currentUser: any;
+    public static isUserLoggedIn: boolean;
     public static userLogout = () => {
         clearUserDetails();
+        window.location.href = "/login";
 
-      
     }
     public static chkUserLogin = () => {
 
         const user = getLocalStorage("user");
         const token = getLocalStorage("token");
-        if (user && token)
+        if (user && token) {
+            this.currentUser = { ...user }
+         
+            this.isUserLoggedIn = true;
             return true
+        }
+
         else {
             clearUserDetails();
             return false;

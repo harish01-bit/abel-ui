@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useLoginMutate } from '../../middleware/hooks/useLoginApi';
 import { useNavigate } from 'react-router-dom';
 import { setLocalStorage } from '../../helpers/util.service';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AuthenticationService } from '../../helpers/authetication.service';
 
 export const useLoginModule = () => {
@@ -13,7 +13,7 @@ export const useLoginModule = () => {
         mutateAsync: login
     } = useLoginMutate();
     const navigate = useNavigate();
-
+    const [formError, setFormError] = useState<string>("")
 
 
 
@@ -37,20 +37,25 @@ export const useLoginModule = () => {
         validateOnMount: false,
         validationSchema,
         onSubmit: async (values) => {
-            console.log(values)
+           setFormError("")
             const res = await login({
                 userEmail: values.userEmail,
                 password: values.password
             })
-            if (res.isSuccess) {
+            if (res?.isSuccess) {
                 setLocalStorage("user", res.user)
                 setLocalStorage("token", res.token)
+                AuthenticationService.currentUser = res.user;
+                AuthenticationService.isUserLoggedIn = true;
                 navigate("/chat");
+            }
+            else{
+                setFormError("login Failed. Please Try again!")
             }
         },
     });
 
 
-    return { form };
+    return { form,formError };
 
 }

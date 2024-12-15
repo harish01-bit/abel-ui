@@ -8,7 +8,7 @@ export const useSendMessageMutate = () => {
     const queryClient = useQueryClient();
     return useMutation(
         (request: any) =>
-            service.SendMessageRequest(request),
+            service.sendMessageRequest(request),
         mutationHelperFun(queryClient, "")
     );
 };
@@ -18,7 +18,17 @@ export const usePollResponsetate = () => {
     const queryClient = useQueryClient();
     return useMutation(
         (request: any) =>
-            service.PollForResponse(request),
+            service.pollForResponse(request),
+        mutationHelperFun(queryClient, "")
+    );
+};
+
+export const useGetLatestQueryListMutate = () => {
+    const service = new ChatApiService();
+    const queryClient = useQueryClient();
+    return useMutation(
+        (request: any) =>
+            service.getLatestUserQueryList(request),
         mutationHelperFun(queryClient, "")
     );
 };

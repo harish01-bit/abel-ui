@@ -297,3 +297,68 @@ body {
   background: #e2e8f0;
   margin-left: 5px;
 }
+/* Ensure the form is centered */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 364px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style input fields */
+.form-control {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border-radius: 16px;
+  background: rgba(240, 237, 255, 0.8);
+  border: 1px solid #ccc;
+  color: #1C1C1C;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.form-control::placeholder {
+  color: #1C1C1C;
+}
+
+/* Button styling */
+.submit-btn {
+  background-color: #007bff; /* Blue color */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 364px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Error message styling */
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: -8px;
+  margin-bottom: 18px;
+}
+
+/* For H3 styling inside the form */
+h3 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Optional: Remove margin from form inputs */
+input {
+  margin-bottom: 18px;
+}
