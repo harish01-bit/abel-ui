@@ -1,5 +1,6 @@
 import { AppConfigUtil } from "../../helpers/app-config-util";
 import { AuthenticationService } from "../../helpers/authetication.service";
+import { restClient } from "../../helpers/rest-helper.service";
 
 export class LoginApiService {
     AutheticateUser = async (request: any) => {
@@ -12,7 +13,7 @@ export class LoginApiService {
                 body: JSON.stringify(request)
             });
             const data = await res.json();
-            if (data.isSuccess) {
+            if (data?.isSuccess) {
 
                 return data;
 
@@ -29,13 +30,13 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
        
-            const res = await fetch(baseUrl + "User/RefreshToken", {
+            const res = await restClient(baseUrl + "User/RefreshToken", {
                 method: 'post',
-                headers: AuthenticationService.getRequestHeaders(),
+              
                 body: JSON.stringify(request)
             });
             const data = await res.json();
-            if (data.isSuccess) {
+            if (data?.isSuccess) {
 
                 return data;
 

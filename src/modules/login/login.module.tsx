@@ -2,12 +2,13 @@ import { useLoginModule } from "../hooks/useLoginModule"
 
 
 export const LoginModule = () => {
-    const { form } = useLoginModule();
+    const { form,formError } = useLoginModule();
     return (
-        <form onSubmit={form.handleSubmit} noValidate>
+        <form className="login-form"  onSubmit={form.handleSubmit} noValidate>
+             <h3>Abel</h3>
             <input
                 type="text"
-                className="question-input"
+                className="form-control"
                 name="userEmail"
                 id="userEmail"
                 value={form.values.userEmail}
@@ -15,20 +16,21 @@ export const LoginModule = () => {
 
                 placeholder="User Email"
             />
-            <br></br>
-            <br></br>
+             {form.errors.userEmail &&  typeof form.errors.userEmail === "string" &&  (<span className="error-text">{form.errors.userEmail}</span>)}
+          
             <input
                 type="password"
-                className="question-input"
+                  className="form-control"
                 id="password"
                 name="password"
                 value={form.values.password}
                 onChange={form.handleChange}
 
                 placeholder="Password"
-            />
+            />     {form.errors.password &&  typeof form.errors.password === "string" &&  (<span className="error-text">{form.errors.password}</span>)}
+              {formError !="" && (<span className="error-text">{formError}</span>)}
                <br></br>
-            <button title={"Login"} type="submit" >Login </button>
+               <button type="submit" className="submit-btn">Login</button>
         </form>
     )
 }

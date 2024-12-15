@@ -1,6 +1,11 @@
 
 
-function ChatSideBarComponent() {
+function ChatSideBarComponent({newChat}: any) {
+    const handleNewChat = () => {
+        console.log("hi")
+        newChat();
+    }
+
     return (
         <div className="tyn-aside tyn-aside-base">
             <div className="tyn-aside-head">
@@ -8,13 +13,14 @@ function ChatSideBarComponent() {
                     <h3 className="tyn-aside-title tyn-title">Abel AI</h3>
                     {/*<span className="tyn-subtext">200+ Conversations </span>*/}
                 </div>
-              
+
                 <div className="tyn-aside-head-tools">
                     <ul className="tyn-list-inline gap gap-3">
                         <li>
                             <a
                                 className="btn btn-icon btn-light btn-md btn-pill"
-                                href="chat-bot-new.html"
+                               
+                                onClick={handleNewChat}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +35,7 @@ function ChatSideBarComponent() {
                                         d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
                                     />
                                 </svg>
-                                
+
                             </a>
                         </li>
                     </ul>
@@ -69,7 +75,7 @@ function ChatSideBarComponent() {
                         </div>
                         {/* .tyn-media-group */}
                     </li>
-                    
+
                 </ul>
                 {/* .tyn-aside-list */}
             </div>

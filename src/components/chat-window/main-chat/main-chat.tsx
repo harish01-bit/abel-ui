@@ -3,11 +3,14 @@ import { useChatWindow } from "../../hooks/useChatWindow";
 import IconComponent from "../../ui-component/icon/icon";
 import ChatRequestComponent from "./chat-request/chat-request";
 import ChatResponseComponent from "./chat-response/chat-response";
+type Props = {
+    querMasterID :any
+    setQueryMasterID:any
+}
 
+function MainChatComponent({querMasterID,setQueryMasterID}:Props) {
 
-function MainChatComponent() {
-
-    const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow();
+    const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow({querMasterID,setQueryMasterID});
     return (
         <div className="chat-main">
             <div className="message-container">

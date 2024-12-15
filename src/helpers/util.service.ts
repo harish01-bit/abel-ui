@@ -1,3 +1,4 @@
+import { AuthenticationService } from "./authetication.service";
 
 export const setLocalStorage = (key: string, value: any): any => {
 
@@ -12,11 +13,13 @@ export const getLocalStorage = (key: string) => {
 
 }
 export const clearStorage = (key: string) => {
-   localStorage.removeItem(key)
+    localStorage.removeItem(key)
 
 }
-export const clearUserDetails= () => {
+export const clearUserDetails = () => {
+   
     clearStorage("user")
     clearStorage("key")
- 
- }
+    AuthenticationService.currentUser = null;
+    AuthenticationService.isUserLoggedIn = false;
+}

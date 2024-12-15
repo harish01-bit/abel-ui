@@ -1,18 +1,19 @@
 import { AppConfigUtil } from "../../helpers/app-config-util";
 import { AuthenticationService } from "../../helpers/authetication.service";
+import { restClient } from "../../helpers/rest-helper.service";
 
 export class ChatApiService {
-    SendMessageRequest = async (request: any) => {
+    sendMessageRequest = async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            console.log(baseUrl)
-            const res = await fetch(baseUrl + "Client/ProcessClientQuery", {
+            
+            const res = await restClient(baseUrl + "Client/ProcessClientQuery", {
                 method: 'post',
-                headers:AuthenticationService.getRequestHeaders(),
+              
                 body: JSON.stringify(request)
             });
             const data = await res.json();
-            if (data.isSuccess) {
+            if (data?.isSuccess) {
 
                 return data;
 
@@ -21,30 +22,49 @@ export class ChatApiService {
                 return null;
             }
         } catch (ex) {
-            console.log(ex)
+           
             return null
         }
     };
 
-    PollForResponse = async (request: any) => {
+    pollForResponse = async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            const res = await fetch(baseUrl + "Client/GetClientQuery", {
+            const res = await restClient(baseUrl + "Client/GetClientQuery", {
                 method: 'post',
-                headers: AuthenticationService.getRequestHeaders(),
+                
                 body: JSON.stringify(request)
             });
             const data = await res.json();
-            if (data.isSuccess && data.clientQueryModel) {
+            if (data?.isSuccess && data?.clientQueryModel) {
                 return data;
             }
             else {
                 return null;
             }
         } catch (ex) {
-            console.log(ex);
+           
         }
     };
-
+    
+    getLatestUserQueryList=async (request: any) => {
+        try {
+            const baseUrl = AppConfigUtil.appconfig.serviceUrl;
+            const res = await restClient(baseUrl + "Client/GetLatestUserQueryList", {
+                method: 'post',
+                
+                body: JSON.stringify(request)
+            });
+            const data = await res.json();
+            if (data?.isSuccess ) {
+                return data;
+            }
+            else {
+                return null;
+            }
+        } catch (ex) {
+            
+        }
+    };
 
 }
