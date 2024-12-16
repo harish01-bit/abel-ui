@@ -1,16 +1,22 @@
+import { useState } from "react";
+import SidebarBottomLinks from "./chat-sidebar-bottom-link";
+import { MdMenu } from "react-icons/md";
 
-
-function ChatSideBarComponent({newChat}: any) {
+function ChatSideBarComponent({newChat,collapseSidebar,handleCollapseSidebar}: any) {
     const handleNewChat = () => {
         console.log("hi")
         newChat();
     }
-
+    const handlerToggleSideBar = () => {
+        handleCollapseSidebar();
+    }
     return (
-        <div className="tyn-aside tyn-aside-base">
+        <div className={`tyn-aside tyn-aside-base ${collapseSidebar ? "collapse-sidebar" : ""}`}>
             <div className="tyn-aside-head">
                 <div className="tyn-aside-head-text">
-                    <h3 className="tyn-aside-title tyn-title">Abel AI</h3>
+                    <span className="toggleIcon" onClick={handlerToggleSideBar}>
+                        <MdMenu/>
+                    </span>
                     {/*<span className="tyn-subtext">200+ Conversations </span>*/}
                 </div>
 
@@ -18,7 +24,7 @@ function ChatSideBarComponent({newChat}: any) {
                     <ul className="tyn-list-inline gap gap-3">
                         <li>
                             <a
-                                className="btn btn-icon btn-light btn-md btn-pill"
+                                className="btn btn-light btn-md btn-pill new-chat-btn"
                                
                                 onClick={handleNewChat}
                             >
@@ -35,7 +41,7 @@ function ChatSideBarComponent({newChat}: any) {
                                         d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
                                     />
                                 </svg>
-
+                                <span>New chat</span>
                             </a>
                         </li>
                     </ul>
@@ -80,6 +86,7 @@ function ChatSideBarComponent({newChat}: any) {
                 {/* .tyn-aside-list */}
             </div>
             {/* .tyn-aside-body */}
+            <SidebarBottomLinks/>
         </div>
     )
 

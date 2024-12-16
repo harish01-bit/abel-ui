@@ -10,9 +10,7 @@ function ChatResponseComponent({ message }: Props) {
         <Fragment>
             <div className="avtar" />
             <div className="text-wrapper">
-                <h4 className="user">
-                    Abel AI
-                </h4>
+                <img src="/letter-a.gif" className="a-gif"/>
                 <div className="content">
                     <RenderText text={message} />
                 </div>
