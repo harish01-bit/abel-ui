@@ -3,13 +3,13 @@ import { ChatApiService } from "../../middleware/services/chat-api.service";
 import { useGetClientChatListMutate, useGetLatestQueryListMutate, usePollResponsetate, useSendMessageMutate } from "../../middleware/hooks/useChatApi";
 import { AuthenticationService } from "../../helpers/authetication.service";
 
-export const useChatWindow = ({querMasterID,setQueryMasterID,currentUser}:any) => {
+export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: any) => {
 
     const [messages, setMessages] = useState<Array<any>>([]);
     const [input, setInput] = useState("");
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
     const service = new ChatApiService();
-   
+
     const pollingInterval = 1000; // 1 second
     const pollingDuration = 5 * 60 * 1000; // 5 minutes
 
@@ -19,7 +19,7 @@ export const useChatWindow = ({querMasterID,setQueryMasterID,currentUser}:any) =
 
     const isFetched = useRef(false);
     const {
-       
+
         mutateAsync: sendMessage
     } = useSendMessageMutate();
 
@@ -36,7 +36,7 @@ export const useChatWindow = ({querMasterID,setQueryMasterID,currentUser}:any) =
         mutateAsync: getClientChatList
     } = useGetClientChatListMutate();
 
-    const  getClientChatListWithMasterID = ()=>{
+    const getClientChatListWithMasterID = () => {
         getClientChatList({
             queryMasterID: querMasterID,
             userID: currentUser.userID,
@@ -49,7 +49,7 @@ export const useChatWindow = ({querMasterID,setQueryMasterID,currentUser}:any) =
                         appendMessage(q.response, "ai")
 
                     })
-                    
+
                 }
                 setIsProcessing(false);
             }
@@ -58,8 +58,8 @@ export const useChatWindow = ({querMasterID,setQueryMasterID,currentUser}:any) =
                 setIsProcessing(true);
             }
         })
-   }
- 
+    }
+
     useEffect(() => {
         if (currentUser?.userID && !isFetched.current) {
             isFetched.current = true;
@@ -88,16 +88,16 @@ export const useChatWindow = ({querMasterID,setQueryMasterID,currentUser}:any) =
         }
 
     }, [currentUser?.userID, getLatestUserQueryList])
-    useEffect(()=>{
-        if(querMasterID==0){
+    useEffect(() => {
+        if (querMasterID == 0) {
             setMessages([])
         }
-        else{
-            setMessages([])
+        else {
+          
             getClientChatListWithMasterID();
         }
 
-    },[querMasterID])
+    }, [querMasterID])
     const appendMessage = (message: string, sender: string) => {
 
 
@@ -120,8 +120,8 @@ export const useChatWindow = ({querMasterID,setQueryMasterID,currentUser}:any) =
         })
 
         if (sendMessageResponse?.isSuccess) {
-            if(querMasterID==0)
-            setQueryMasterID(sendMessageResponse.clientQueryMasterID)
+            if (querMasterID == 0)
+                setQueryMasterID(sendMessageResponse.clientQueryMasterID)
             intervalId = setInterval(async () => {
                 PollMessageResponse(sendMessageResponse)
             }, pollingInterval);

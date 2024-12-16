@@ -33,7 +33,7 @@ export const useChatSideBar = ({ newChat, handleCollapseSidebar, currentUser }: 
 
             }
         })
-    }, [currentUser?.userID, getLatestUserQueryMasterList, querymasterList])
+    }, [currentUser?.userID, getLatestUserQueryMasterList])
     return { querymasterList,handlerToggleSideBar,handleNewChat  }
 
 }
