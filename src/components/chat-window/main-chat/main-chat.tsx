@@ -7,11 +7,13 @@ import AuthHeaderComponent from "../../../layout/header/auth-header";
 type Props = {
     querMasterID :any
     setQueryMasterID:any
+    currentUser:any
+
 }
 
-function MainChatComponent({querMasterID,setQueryMasterID,}:Props) {
+function MainChatComponent({querMasterID,setQueryMasterID,currentUser}:Props) {
 
-    const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow({querMasterID,setQueryMasterID});
+    const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow({querMasterID,setQueryMasterID,currentUser});
     return (
         <>
             <div className="chat-main">

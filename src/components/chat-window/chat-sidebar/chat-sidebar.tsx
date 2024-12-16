@@ -1,21 +1,19 @@
 import { useState } from "react";
 import SidebarBottomLinks from "./chat-sidebar-bottom-link";
 import { MdMenu } from "react-icons/md";
+import { useChatSideBar } from "../../hooks/useChatSideBar";
+import { ChatMasterComponent } from "./chat-master/chat-master";
 
-function ChatSideBarComponent({newChat,collapseSidebar,handleCollapseSidebar}: any) {
-    const handleNewChat = () => {
-        console.log("hi")
-        newChat();
-    }
-    const handlerToggleSideBar = () => {
-        handleCollapseSidebar();
-    }
+function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID }: any) {
+    const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser });
+
+ 
     return (
         <div className={`tyn-aside tyn-aside-base ${collapseSidebar ? "collapse-sidebar" : ""}`}>
             <div className="tyn-aside-head">
                 <div className="tyn-aside-head-text">
                     <span className="toggleIcon" onClick={handlerToggleSideBar}>
-                        <MdMenu/>
+                        <MdMenu />
                     </span>
                     {/*<span className="tyn-subtext">200+ Conversations </span>*/}
                 </div>
@@ -25,7 +23,7 @@ function ChatSideBarComponent({newChat,collapseSidebar,handleCollapseSidebar}: a
                         <li>
                             <a
                                 className="btn btn-light btn-md btn-pill new-chat-btn"
-                               
+
                                 onClick={handleNewChat}
                             >
                                 <svg
@@ -45,48 +43,27 @@ function ChatSideBarComponent({newChat,collapseSidebar,handleCollapseSidebar}: a
                             </a>
                         </li>
                     </ul>
+                    <ul>
+                        <li>
+                            Recent
+                        </li>
+                    </ul>
                 </div>
-                {/* .tyn-aside-head-tools */}
+
             </div>
-            {/* .tyn-aside-head */}
+
             <div className="tyn-aside-body" data-simplebar="">
                 <ul className="tyn-aside-list">
-                    <li className="tyn-aside-item js-toggle-main ">
-                        <div className="tyn-media-group">
-                            <div className="tyn-size-sm">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    aria-hidden="true"
-                                    viewBox="0 0 24 24"
-                                    style={{ width: 24, height: 24 }}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M6.75 19.25h10.5a2 2 0 0 0 2-2v-7.5l-7.25-5-7.25 5v7.5a2 2 0 0 0 2 2Z"
-                                    />
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M9.75 15.75a2 2 0 0 1 2-2h.5a2 2 0 0 1 2 2v3.5h-4.5v-3.5Z"
-                                    />
-                                </svg>
-                            </div>
-                            <div className="tyn-media-col">
-                                <div className="content">Home</div>
-                            </div>
-                        </div>
-                        {/* .tyn-media-group */}
-                    </li>
+                    {querymasterList?.map(q =>
+                        <ChatMasterComponent setQueryMasterID={setQueryMasterID} key={q.clientQueryMasterID} queryMaster={q} />
+                    )
 
+                    }
                 </ul>
-                {/* .tyn-aside-list */}
+
             </div>
-            {/* .tyn-aside-body */}
-            <SidebarBottomLinks/>
+
+            <SidebarBottomLinks />
         </div>
     )
 

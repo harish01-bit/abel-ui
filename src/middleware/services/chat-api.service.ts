@@ -66,5 +66,42 @@ export class ChatApiService {
             
         }
     };
-
+    getLatestUserQueryMasterList=async (request: any) => {
+        try {
+            const baseUrl = AppConfigUtil.appconfig.serviceUrl;
+            const res = await restClient(baseUrl + "Client/GetUserQueryMasterList", {
+                method: 'post',
+                
+                body: JSON.stringify(request)
+            });
+            const data = await res.json();
+            if (data?.isSuccess ) {
+                return data;
+            }
+            else {
+                return null;
+            }
+        } catch (ex) {
+            
+        }
+    };
+    getClientChatList=async (request: any) => {
+        try {
+            const baseUrl = AppConfigUtil.appconfig.serviceUrl;
+            const res = await restClient(baseUrl + "Client/GetUserQueryList", {
+                method: 'post',
+                
+                body: JSON.stringify(request)
+            });
+            const data = await res.json();
+            if (data?.isSuccess ) {
+                return data;
+            }
+            else {
+                return null;
+            }
+        } catch (ex) {
+            
+        }
+    };
 }

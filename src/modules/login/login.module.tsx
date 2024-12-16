@@ -29,7 +29,7 @@ export const LoginModule = () => {
                 placeholder="Password"
             />     {form.errors.password &&  typeof form.errors.password === "string" &&  (<span className="error-text">{form.errors.password}</span>)}
               {formError !="" && (<span className="error-text">{formError}</span>)}
-               <br></br>
+            
                <button type="submit" className="submit-btn">Login</button>
         </form>
     )

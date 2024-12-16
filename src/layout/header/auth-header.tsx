@@ -12,7 +12,7 @@ function AuthHeaderComponent() {
                 <div className="tyn-appbar-logo">
                     <a className="tyn-logo" href="index.html">
                         <img src="/letter-a.gif" className="a-gif"/>
-                        Able AI
+                        Abel
                     </a>
                 </div>
                 {/* .tyn-appbar-logo */}

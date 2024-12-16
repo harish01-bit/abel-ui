@@ -1,0 +1,30 @@
+import { useEffect, useState } from "react";
+import { AuthenticationService } from "../../helpers/authetication.service";
+
+export const useChatWindowModule= () => {
+    const [querMasterID, setQueryMasterID] = useState<number>(0);
+    const [collapseSidebar,setCollapseSidebar] = useState<boolean>(false);
+    const [currentUser, setCurrentUser] = useState<any>({ ...AuthenticationService.currentUser }); // Load user state
+
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const user = await AuthenticationService.currentUser;
+
+            setCurrentUser(user);
+        };
+        fetchUser();
+    }, [AuthenticationService.currentUser]);
+
+    const handleCollapseSidebar = () => {
+      setCollapseSidebar((c) => !c);
+    }
+    // Function to clear the chat value
+    const handleNewChat = () => {
+      setQueryMasterID(0) // Clear the value
+    };
+    return {
+        querMasterID,setQueryMasterID,collapseSidebar,setCollapseSidebar,
+        handleCollapseSidebar,handleNewChat,currentUser
+    }
+}

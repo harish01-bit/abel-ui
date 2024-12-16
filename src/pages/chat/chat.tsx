@@ -1,5 +1,5 @@
 
-import ChatWindow from '../../modules/chat-window/chat-window';
+import ChatWindow from '../../modules/chat-window/chat-window.module';
 
 const ChatPage = () => {
    

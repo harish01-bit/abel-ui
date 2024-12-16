@@ -31,4 +31,26 @@ export const useGetLatestQueryListMutate = () => {
             service.getLatestUserQueryList(request),
         mutationHelperFun(queryClient, "")
     );
+    
+};
+
+export const useGetLatestQueryMasterListMutate = () => {
+    const service = new ChatApiService();
+    const queryClient = useQueryClient();
+    return useMutation(
+        (request: any) =>
+            service.getLatestUserQueryMasterList(request),
+        mutationHelperFun(queryClient, "")
+    );
+    
+};
+export const useGetClientChatListMutate = () => {
+    const service = new ChatApiService();
+    const queryClient = useQueryClient();
+    return useMutation(
+        (request: any) =>
+            service.getClientChatList(request),
+        mutationHelperFun(queryClient, "")
+    );
+    
 };
