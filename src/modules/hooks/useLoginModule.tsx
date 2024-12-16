@@ -3,13 +3,12 @@ import * as Yup from 'yup';
 import { useLoginMutate } from '../../middleware/hooks/useLoginApi';
 import { useNavigate } from 'react-router-dom';
 import { setLocalStorage } from '../../helpers/util.service';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AuthenticationService } from '../../helpers/authetication.service';
 
 export const useLoginModule = () => {
     const {
-        data: postData,
-        isLoading: postLoading,
+      
         mutateAsync: login
     } = useLoginMutate();
     const navigate = useNavigate();

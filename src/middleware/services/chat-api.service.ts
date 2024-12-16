@@ -1,5 +1,5 @@
 import { AppConfigUtil } from "../../helpers/app-config-util";
-import { AuthenticationService } from "../../helpers/authetication.service";
+
 import { restClient } from "../../helpers/rest-helper.service";
 
 export class ChatApiService {
