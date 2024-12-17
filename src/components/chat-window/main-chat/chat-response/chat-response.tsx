@@ -7,11 +7,11 @@ type Props = {
 
 function ChatResponseComponent({ message }: Props) {
     return (
-        <Fragment>
+        <Fragment >
             <div className="avtar" />
             <div className="text-wrapper">
                 <img src="/letter-a.gif" className="a-gif"/>
-                <div className="content">
+                <div className="content  text-wrapper">
                     <RenderText text={message} />
                 </div>
             </div>

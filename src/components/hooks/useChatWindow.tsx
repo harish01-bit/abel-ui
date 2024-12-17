@@ -37,6 +37,9 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
     } = useGetClientChatListMutate();
 
     const getClientChatListWithMasterID = () => {
+
+        if (messages.length > 1)
+            setMessages([])
         getClientChatList({
             queryMasterID: querMasterID,
             userID: currentUser.userID,
@@ -45,6 +48,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
             if (res?.isSuccess) {
                 if (res.clientQueryList?.length > 0) {
                     res.clientQueryList?.forEach((q: any) => {
+                        console.log(res)
                         appendMessage(q.request, "user")
                         appendMessage(q.response, "ai")
 
@@ -58,42 +62,17 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
                 setIsProcessing(true);
             }
         })
+
     }
 
-    useEffect(() => {
-        if (currentUser?.userID && !isFetched.current) {
-            isFetched.current = true;
-            setIsProcessing(true);
-            getLatestUserQueryList({
-                userID: currentUser.userID,
-                tenantID: currentUser.tenantID
-            }).then(res => {
 
-                if (res?.isSuccess) {
-                    if (res.clientQueryList?.length > 0) {
-                        res.clientQueryList?.forEach((q: any) => {
-                            appendMessage(q.request, "user")
-                            appendMessage(q.response, "ai")
 
-                        })
-                        setQueryMasterID(res.clientQueryList[0].clientQueryMasterID)
-                    }
-                    setIsProcessing(false);
-                }
-                else {
-                    appendMessage("Sorry, something went wrong!", "ai")
-                    setIsProcessing(true);
-                }
-            })
-        }
-
-    }, [currentUser?.userID, getLatestUserQueryList])
     useEffect(() => {
         if (querMasterID == 0) {
             setMessages([])
         }
         else {
-          
+
             getClientChatListWithMasterID();
         }
 
@@ -111,8 +90,8 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
         setInput("");
         setIsProcessing(true);
         const sendMessageResponse = await sendMessage({
-            tenantID: 1,
-            userID: 1,
+            tenantID: currentUser?.tenantID,
+            userID: currentUser?.userID,
             queryMasterID: querMasterID,
             query: input,
             title: "Able Message",
@@ -120,8 +99,10 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
         })
 
         if (sendMessageResponse?.isSuccess) {
-            if (querMasterID == 0)
+            if (querMasterID == 0) {
                 setQueryMasterID(sendMessageResponse.clientQueryMasterID)
+            }
+
             intervalId = setInterval(async () => {
                 PollMessageResponse(sendMessageResponse)
             }, pollingInterval);

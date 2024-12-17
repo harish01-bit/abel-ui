@@ -3,7 +3,7 @@ import { MdOutlineNote } from "react-icons/md";
 
 
 export function ChatMasterComponent({ queryMaster, setQueryMasterID,querMasterID }: any) {
-    console.log(queryMaster)
+  
     const handleClick = () => {
         setQueryMasterID(queryMaster.clientQueryMasterID)
     }

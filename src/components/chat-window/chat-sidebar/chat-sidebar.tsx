@@ -5,7 +5,7 @@ import { useChatSideBar } from "../../hooks/useChatSideBar";
 import { ChatMasterComponent } from "./chat-master/chat-master";
 
 function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID, querMasterID }: any) {
-    const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser });
+    const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser,setQueryMasterID });
 
  
     return (
