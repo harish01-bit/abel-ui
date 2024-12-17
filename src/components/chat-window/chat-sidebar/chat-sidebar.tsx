@@ -4,7 +4,7 @@ import { MdMenu } from "react-icons/md";
 import { useChatSideBar } from "../../hooks/useChatSideBar";
 import { ChatMasterComponent } from "./chat-master/chat-master";
 
-function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID }: any) {
+function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID, querMasterID }: any) {
     const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser });
 
  
@@ -55,7 +55,7 @@ function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar,
             <div className="tyn-aside-body" data-simplebar="">
                 <ul className="tyn-aside-list">
                     {querymasterList?.map(q =>
-                        <ChatMasterComponent setQueryMasterID={setQueryMasterID} key={q.clientQueryMasterID} queryMaster={q} />
+                        <ChatMasterComponent setQueryMasterID={setQueryMasterID} key={q.clientQueryMasterID} querMasterID={querMasterID} queryMaster={q} />
                     )
 
                     }

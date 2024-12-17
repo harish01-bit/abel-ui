@@ -17,6 +17,7 @@ const ChatWindow = () => {
         <Fragment>
           <ChatSideBarComponent 
                currentUser={currentUser} 
+               querMasterID={querMasterID}
           newChat={handleNewChat} setQueryMasterID={setQueryMasterID} collapseSidebar={collapseSidebar} handleCollapseSidebar={handleCollapseSidebar} />
 
           <MainChatComponent

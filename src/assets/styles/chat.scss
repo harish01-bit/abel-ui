@@ -15,23 +15,26 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    .chat-wrapper{
+        overflow-y: auto;
+        max-height: calc(100% - 88px);
+    }
     .message-container{
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         flex-grow: 1;
         padding: calc(var(--appbar-height) + 10px) 16px 0;
-        max-height: calc(100% - 88px);
         .message-wrapper{
             gap: 8px;
             display: flex;
             flex-direction: column-reverse;
             max-height: 100%;
             overflow-y: auto;
-            max-width: 724px;
+            max-width: 90%;
             margin: 0 auto;
             img.a-gif{
-                width: 32px;
+                width: 40px;
                 margin-right: 10px;
             }
             h4.user{
@@ -64,16 +67,32 @@
                 }
             }
             &.user-input-group{
-                justify-content: flex-end;
+                padding: 8px 16px;
+                justify-content: flex-start;
                 &:hover{
                     background: none;
+                }
+                .avtar{
+                    margin-right: 10px;
+                    margin-top: 8px;
+                    display: flex;
+                    height: 40px;
+                    width: 40px;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 500;
                 }
                 .text-wrapper{
                     display: flex;
                     padding: 8px 16px;
                     background: #ECF4FD;
-                    width: fit-content;
-                    border-radius: 9999px;
+                    border-radius: 8px;
+                    margin-left: 0;
+                    .content{
+                        padding: 5px 0 0;
+                        margin-left: 10px;
+
+                    }
                     
                 }
             }
@@ -148,16 +167,14 @@
         padding: 16px 24px 24px;
         .form-wrapper{
             border-radius: 25px;
-            width: 100%;
             height: 48px;
             border: 1px solid #BEC5D0;
-            width: 100%;
-            max-width: 724px;
+            max-width: 90%;
             position: relative;
         }
         .question-input{
             border-radius: 25px;
-            padding: 0 100px 0 16px;
+            padding: 0 100px 0 48px;
             width: 100%;
             height: 46px;
             border: none;
@@ -167,6 +184,19 @@
             font-size: 14px;
             &:focus{
                 border: 2px solid rgb(37,99,235);
+            }
+        }
+        .input-attachment{
+            position: absolute;
+            top: 0;
+            left: 16px;
+            display: flex;
+            height: 48px;
+            align-items: center;
+            cursor: pointer;
+            svg{
+                height: 20px;
+                width: auto;
             }
         }
         .input-action{

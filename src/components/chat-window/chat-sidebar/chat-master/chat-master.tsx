@@ -1,21 +1,21 @@
 import { dateFormatter } from "../../../../helpers/date-util.service";
+import { MdOutlineNote } from "react-icons/md";
 
-export function ChatMasterComponent({ queryMaster, setQueryMasterID }: any) {
 
+export function ChatMasterComponent({ queryMaster, setQueryMasterID,querMasterID }: any) {
+    console.log(queryMaster)
     const handleClick = () => {
         setQueryMasterID(queryMaster.clientQueryMasterID)
     }
-    return (<li>
+    return (<li className={`${queryMaster.clientQueryMasterID === querMasterID ? 'active' : ''}`}>
         <a
-            className="btn btn-light btn-md "
+            className="btn btn-md "
             onClick={handleClick }
 
         >
+            <MdOutlineNote/>
             <span>
-
                 {queryMaster.context.substr(0, 25)}...
-
-
             </span>
 
 
