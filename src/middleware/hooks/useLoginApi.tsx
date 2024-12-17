@@ -23,3 +23,12 @@ export const useRefreshToken = () => {
         mutationHelperFun(queryClient, "")
     );
 };
+export const useRegisterUserMutate = () => {
+
+    const queryClient = useQueryClient();
+    return useMutation(
+        (request: any) =>
+            service.RegistereUser(request),
+        mutationHelperFun(queryClient, "")
+    );
+};

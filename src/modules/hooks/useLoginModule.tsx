@@ -8,13 +8,16 @@ import { AuthenticationService } from '../../helpers/authetication.service';
 
 export const useLoginModule = () => {
     const {
-      
+
         mutateAsync: login
     } = useLoginMutate();
     const navigate = useNavigate();
     const [formError, setFormError] = useState<string>("")
 
 
+    const handleRegisterLinkClick = () => {
+        navigate("/register");
+    }
 
     const validationSchema = Yup.object<any>({
 
@@ -25,6 +28,7 @@ export const useLoginModule = () => {
 
 
     });
+   
     const form = useFormik<any>({
         initialValues: {
             password: "",
@@ -36,7 +40,7 @@ export const useLoginModule = () => {
         validateOnMount: false,
         validationSchema,
         onSubmit: async (values) => {
-           setFormError("")
+            setFormError("")
             const res = await login({
                 userEmail: values.userEmail,
                 password: values.password
@@ -48,13 +52,13 @@ export const useLoginModule = () => {
                 AuthenticationService.isUserLoggedIn = true;
                 navigate("/chat");
             }
-            else{
+            else {
                 setFormError("login Failed. Please Try again!")
             }
         },
     });
 
 
-    return { form,formError };
+    return { form, formError, handleRegisterLinkClick };
 
 }

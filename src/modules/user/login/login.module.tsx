@@ -1,8 +1,8 @@
-import { useLoginModule } from "../hooks/useLoginModule"
+import { useLoginModule } from "../../hooks/useLoginModule"
 
 
 export const LoginModule = () => {
-    const { form,formError } = useLoginModule();
+    const { form,formError,handleRegisterLinkClick } = useLoginModule();
     return (
         <form className="login-form"  onSubmit={form.handleSubmit} noValidate>
              <h3>Abel</h3>
@@ -31,6 +31,7 @@ export const LoginModule = () => {
               {formError !="" && (<span className="error-text">{formError}</span>)}
             
                <button type="submit" className="submit-btn">Login</button>
+               <a type="submit" onClick={handleRegisterLinkClick} className="submit-btn">Register</a>
         </form>
     )
 }

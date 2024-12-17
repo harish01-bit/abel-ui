@@ -26,6 +26,31 @@ export class LoginApiService {
             return null
         }
     };
+
+    RegistereUser = async (request: any) => {
+        try {
+            const baseUrl = AppConfigUtil.appconfig.serviceUrl;
+          
+            const res = await fetch(baseUrl + "User/Register", {
+                method: 'post',
+                headers:AuthenticationService.getRequestHeaders(),
+                body: JSON.stringify(request)
+            });
+            const data = await res.json();
+            if (data?.isSuccess) {
+
+                return data;
+
+            }
+            else {
+                return null;
+            }
+        } catch (ex) {
+          
+            return null
+        }
+    };
+
     RefreshToken = async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;

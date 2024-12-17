@@ -1,4 +1,4 @@
-import { LoginModule } from "../../modules/login/login.module"
+import { LoginModule } from "../../modules/user/login/login.module"
 
 
 export const LoginPage = () => {

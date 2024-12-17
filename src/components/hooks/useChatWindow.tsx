@@ -48,7 +48,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
             if (res?.isSuccess) {
                 if (res.clientQueryList?.length > 0) {
                     res.clientQueryList?.forEach((q: any) => {
-                        console.log(res)
+                       
                         appendMessage(q.request, "user")
                         appendMessage(q.response, "ai")
 
