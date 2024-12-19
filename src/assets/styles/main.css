@@ -47,34 +47,6 @@ body {
 .login-wrapper p {
   margin-bottom: 24px;
 }
-.login-wrapper .row {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.login-wrapper .row > * {
-  margin-top: 0;
-}
-.login-wrapper input {
-  margin-bottom: 18px;
-}
-.login-wrapper .btn {
-  margin-bottom: 24px;
-  margin-top: 6px;
-}
-.login-wrapper .lined-text {
-  height: 1px;
-  border-top: 1px solid #F0EDFF;
-  position: relative;
-}
-.login-wrapper .lined-text span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background: white;
-  padding: 5px 8px;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
 
 .tyn-aside-list {
   padding: 20px var(--aside-gap-x);
