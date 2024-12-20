@@ -32,3 +32,34 @@ export const useRegisterUserMutate = () => {
         mutationHelperFun(queryClient, "")
     );
 };
+export const useGenerateOTPMutate = () => {
+
+    const queryClient = useQueryClient();
+    return useMutation(
+        (request: any) =>
+            service.GenerateOTP(request),
+        mutationHelperFun(queryClient, "")
+    );
+};
+
+
+export const useResetPasswordMutate = () => {
+
+    const queryClient = useQueryClient();
+    return useMutation(
+        (request: any) =>
+            service.ResetPassword(request),
+        mutationHelperFun(queryClient, "")
+    );
+};
+
+
+export const useVerifyEmailMutate = () => {
+
+    const queryClient = useQueryClient();
+    return useMutation(
+        (request: any) =>
+            service.VerifyEmail(request),
+        mutationHelperFun(queryClient, "")
+    );
+};

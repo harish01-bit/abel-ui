@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 
-export const useRegisternModule = () => {
+export const useForgotPasswordModule = () => {
     const {
 
         mutateAsync: register
@@ -20,30 +20,22 @@ export const useRegisternModule = () => {
 
     const validationSchema = Yup.object<any>({
 
-       
+
         userEmail: Yup.string()
             .required('User Email is required'),
-        registerKey: Yup.string()
-            .required('Registartion Key is required'),
-        firstName: Yup.string()
-            .required('Firstname is required'),
-        surName: Yup.string()
-            .required('Surname is required'),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password')], 'Passwords must match')
             .required('Confirm Password is required'),
-            password: Yup.string()
+        password: Yup.string()
             .required('Password is required')
             .min(8, ' Password is too short. Min 8 charecters required.'),
 
     });
     const form = useFormik<any>({
         initialValues: {
-            password: "",
+         
             userEmail: '',
-            registerKey: '',
-            firstName: '',
-            surName: '',
+          
             confirmPassword: ''
 
         },
@@ -58,7 +50,7 @@ export const useRegisternModule = () => {
                     User: {
                         email: values.userEmail,
                         password: values.password,
-                        userID:0,
+                        userID: 0,
                         roleID: 2,
                         tenantID: 1,
                         firstName: values.firstName,
@@ -81,6 +73,6 @@ export const useRegisternModule = () => {
     });
 
 
-    return { form, formError,handleLoginClick };
+    return { form, formError, handleLoginClick };
 
 }

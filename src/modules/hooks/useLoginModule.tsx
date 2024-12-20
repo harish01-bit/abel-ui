@@ -18,6 +18,9 @@ export const useLoginModule = () => {
     const handleRegisterLinkClick = () => {
         navigate("/register");
     }
+    const handleForgotPasswordLinkClick = () => {
+        navigate("/forgotpassword");
+    }
 
     const validationSchema = Yup.object<any>({
 
@@ -28,7 +31,7 @@ export const useLoginModule = () => {
 
 
     });
-   
+
     const form = useFormik<any>({
         initialValues: {
             password: "",
@@ -46,11 +49,23 @@ export const useLoginModule = () => {
                 password: values.password
             })
             if (res?.isSuccess) {
-                setLocalStorage("user", res.user)
-                setLocalStorage("token", res.token)
-                AuthenticationService.currentUser = res.user;
-                AuthenticationService.isUserLoggedIn = true;
-                navigate("/chat");
+
+                if (res.error == "otp send") {
+                    setFormError("unverified");
+                }
+                else if (res.error == "otp fail") {
+                    setFormError("Email Unverified. Error when genrating OTP. Please contact adminisntrator.")
+                }
+                else {
+
+                    setLocalStorage("user", res.user)
+                    setLocalStorage("token", res.token)
+                    AuthenticationService.currentUser = res.user;
+                    AuthenticationService.isUserLoggedIn = true;
+                    navigate("/chat");
+
+                }
+
             }
             else {
                 setFormError("login Failed. Please Try again!")
@@ -59,6 +74,6 @@ export const useLoginModule = () => {
     });
 
 
-    return { form, formError, handleRegisterLinkClick };
+    return { form, formError, handleRegisterLinkClick, handleForgotPasswordLinkClick };
 
 }

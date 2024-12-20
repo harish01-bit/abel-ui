@@ -74,4 +74,78 @@ export class LoginApiService {
             return null
         }
     };
+
+    GenerateOTP = async (request: any) => {
+        try {
+            const baseUrl = AppConfigUtil.appconfig.serviceUrl;
+       
+            const res = await restClient(baseUrl + "User/GenerateOTP", {
+                method: 'post',
+              
+                body: JSON.stringify(request)
+            });
+            const data = await res.json();
+            if (data?.isSuccess) {
+
+                return data;
+
+            }
+            else {
+                return null;
+            }
+        } catch (ex) {
+            console.log(ex)
+            return null
+        }
+    };
+
+    ResetPassword = async (request: any) => {
+        try {
+            const baseUrl = AppConfigUtil.appconfig.serviceUrl;
+       
+            const res = await restClient(baseUrl + "User/ResetPassword", {
+                method: 'post',
+              
+                body: JSON.stringify(request)
+            });
+            const data = await res.json();
+            if (data?.isSuccess) {
+
+                return data;
+
+            }
+            else {
+                return null;
+            }
+        } catch (ex) {
+            console.log(ex)
+            return null
+        }
+    };
+
+
+    
+    VerifyEmail = async (request: any) => {
+        try {
+            const baseUrl = AppConfigUtil.appconfig.serviceUrl;
+       
+            const res = await restClient(baseUrl + "User/VerifyEmail", {
+                method: 'post',
+              
+                body: JSON.stringify(request)
+            });
+            const data = await res.json();
+            if (data?.isSuccess) {
+
+                return data;
+
+            }
+            else {
+                return null;
+            }
+        } catch (ex) {
+            console.log(ex)
+            return null
+        }
+    };
 }
