@@ -1,3 +1,4 @@
+import { VerifyEmailComponent } from "../../../components/verify-email/verify-email";
 import { useLoginModule } from "../../hooks/useLoginModule"
 import { useRegisternModule } from "../../hooks/useRegisterModule";
 
@@ -5,7 +6,7 @@ import { useRegisternModule } from "../../hooks/useRegisterModule";
 export const RegisterModule = () => {
     const { form, formError, handleLoginClick } = useRegisternModule();
     return (
-        <form className="login-form" onSubmit={form.handleSubmit} noValidate>
+        formError == "otp" ? <VerifyEmailComponent handleLoginClick={handleLoginClick} Email={form.values.userEmail} /> : <form className="login-form" onSubmit={form.handleSubmit} noValidate>
             <h3>Sign Up</h3>
             <input
                 type="text"

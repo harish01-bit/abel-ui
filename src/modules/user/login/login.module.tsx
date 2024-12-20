@@ -7,9 +7,17 @@ import './login.scss';
 import { VerifyEmailComponent } from "../../../components/verify-email/verify-email";
 
 export const LoginModule = () => {
-    const { form, formError, handleRegisterLinkClick, handleForgotPasswordLinkClick } = useLoginModule();
+    const { form, formError, handleRegisterLinkClick, handleForgotPasswordLinkClick, setFormError } = useLoginModule();
     return (
-        formError=="unverified" ? <VerifyEmailComponent Email={form.values.userEmail} /> :
+        formError == "unverified" ?
+            <>
+            <h3>Registration Sucessful!</h3>
+
+                <VerifyEmailComponent handleLoginClick={() => {
+                    setFormError("");
+
+                }} Email={form.values.userEmail} />
+            </> :
             <div className="login-wrapper">
                 <div className="container">
                     <div className="row justify-content-center">

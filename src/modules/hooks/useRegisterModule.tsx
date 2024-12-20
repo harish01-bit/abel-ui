@@ -70,7 +70,7 @@ export const useRegisternModule = () => {
                     setFormError(res.error);
                 }
                 else {
-                    setFormError("Registration Successful!Please Login")
+                    setFormError("otp")
                     resetForm()
                 }
             }

@@ -1,14 +1,14 @@
-import { useLoginModule } from "../../hooks/useLoginModule";
+import { useForgotPasswordModule } from "../../hooks/useForgotPasswordModule";
 
 export const ForgotPasswordModule = () => {
-    const { form, formError, handleRegisterLinkClick } = useLoginModule();
+    const { form, formError, handleLoginClick, action } = useForgotPasswordModule();
     return (
         <div className="login-wrapper">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-12">
                         <div className="row">
-                            
+
                             <div className="col-lg-6 login-form-wrapper">
                                 <form className="login-form" onSubmit={form.handleSubmit} noValidate>
                                     <h3>GENERATE OTP</h3>
@@ -25,36 +25,56 @@ export const ForgotPasswordModule = () => {
                                     />
                                     {form.errors.userEmail && typeof form.errors.userEmail === "string" && (<span className="error-text">{form.errors.userEmail}</span>)}
 
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        id="password"
-                                        name="password"
-                                        value={form.values.password}
-                                        onChange={form.handleChange}
+                                    {action == "verify" &&
+                                        <>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="otp"
+                                                id="otp"
+                                                value={form.values.otp}
+                                                onChange={form.handleChange}
 
-                                        placeholder="Password"
-                                    />     {form.errors.password && typeof form.errors.password === "string" && (<span className="error-text">{form.errors.password}</span>)}
+                                                placeholder="OTP"
+                                            />
+                                            {form.errors.otp && typeof form.errors.otp === "string" && (<span className="error-text">{form.errors.otp}</span>)}
+                                            <input
+                                                type="password"
+                                                className="form-control"
+                                                id="password"
+                                                name="password"
+                                                value={form.values.password}
+                                                onChange={form.handleChange}
+
+                                                placeholder="Password"
+                                            />     {form.errors.password && typeof form.errors.password === "string" && (<span className="error-text">{form.errors.password}</span>)}
+
+
+                                            <input
+                                                type="password"
+                                                className="form-control"
+                                                id="confirmPassword"
+                                                name="confirmPassword"
+                                                value={form.values.confirmPassword}
+                                                onChange={form.handleChange}
+
+                                                placeholder="Confirm Password"
+                                            />     {form.errors.confirmPassword && typeof form.errors.confirmPassword === "string" && (<span className="error-text">{form.errors.confirmPassword}</span>)}
+                                        </>
+
+                                    }
+
                                     {formError != "" && (<span className="error-text">{formError}</span>)}
                                     <div className="col-lg-12 row"
                                         style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
 
-                                        <button type="submit" className="submit-btn">Login</button>
-                                        <button type="button" onClick={handleRegisterLinkClick} className="submit-btn">Forgot Password</button>
-                                        <button type="button" onClick={handleRegisterLinkClick} className="submit-btn">Register</button>
+                                        <button type="submit" className="submit-btn">{action == "otp" ? "Generate OTP" : "Reset Password"}</button>
+
+                                        <button type="button" onClick={handleLoginClick} className="submit-btn">Login</button>
+
                                     </div>
 
-                                    {/*}  <div className="lined-text"><span><strong>Login</strong> with Others</span></div>
-                                        <div className="social-media-login-button">
-                                            <img src={googleIcon}/>
-                                            Login with&nbsp;<strong>google</strong>
-                                        </div>
-                                        <div className="social-media-login-button">
-                                            <img src={facebookIcon}/>
-                                            Login with&nbsp;<strong>Facebook</strong>
-                                        </div>*/}
 
-                                    {/* <a type="submit" onClick={handleRegisterLinkClick} className="submit-btn">Register</a> */}
                                 </form>
                             </div>
                         </div>

@@ -74,6 +74,6 @@ export const useLoginModule = () => {
     });
 
 
-    return { form, formError, handleRegisterLinkClick, handleForgotPasswordLinkClick };
+    return { form, formError, handleRegisterLinkClick, handleForgotPasswordLinkClick,setFormError };
 
 }
