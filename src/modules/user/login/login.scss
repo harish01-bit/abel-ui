@@ -2,6 +2,12 @@
     display: flex;
     align-items: center;
     height: 100vh;
+    a{
+        color: #6E00FF;
+    }
+    .mr-10{
+        margin-right: 10px;
+    }
     .bg-wrapper{
         background: url(../../../assets/images/login-bg.png);
         background-size: cover;
@@ -34,6 +40,9 @@
         background: white;
         border-radius: 0 16px 16px 0;
         display: flex;
+        &.all-border-radius{
+            border-radius: 16px;
+        }
         .login-form{
             display: flex;
             padding: 80px 0;
@@ -52,9 +61,19 @@
             background: #F0EDFF !important;
             margin-bottom: 18px;
             border-radius: 16px;
+            &.mb-5-px{
+                margin-bottom: 5px;
+            }
             &:-webkit-autofill,&:-webkit-autofill:focus{
                 background: #F0EDFF !important;
             }
+        }
+        .link-text{
+            color: #6E00FF;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 14px;
+            cursor: pointer;
         }
         button{
             background: rgb(145,129,244);
@@ -63,14 +82,29 @@
             padding: 0 30px;
             width: fit-content;
             border-radius: 16px;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 500;
             display: flex;
             align-items: center;
             color: white;
             border: none;
-            margin-bottom: 42px;
             margin-top: 14px;
+            &.mb-60{
+                margin-bottom: 60px;
+            }
+            &.w-100{
+                width: 100%;
+                justify-content: center;
+            }
+            
+            &.btn-outline{
+                background: none;
+                color: #6E00FF;
+                border: 1px solid #6E00FF;
+            }
+        }
+        .static-text{
+            font-size: 14px;
         }
         .social-media-login-button{
             width: 100%;
@@ -103,6 +137,11 @@
                 padding: 5px 8px;
                 transform: translate(-50%,-50%);
             }
+        }
+        .action-wrapper{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 }

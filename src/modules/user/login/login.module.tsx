@@ -46,7 +46,7 @@ export const LoginModule = () => {
 
                                         <input
                                             type="password"
-                                            className="form-control"
+                                            className="form-control mb-5-px"
                                             id="password"
                                             name="password"
                                             value={form.values.password}
@@ -55,12 +55,16 @@ export const LoginModule = () => {
                                             placeholder="Password"
                                         />     {form.errors.password && typeof form.errors.password === "string" && (<span className="error-text">{form.errors.password}</span>)}
                                         {formError != "" && (<span className="error-text">{formError}</span>)}
-                                        <div className="col-lg-12 row"
-                                            style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
-
-                                            <button type="submit" className="submit-btn">Login</button>
-                                            <button type="button" onClick={handleForgotPasswordLinkClick} className="submit-btn">Forgot Password</button>
-                                            <button type="button" onClick={handleRegisterLinkClick} className="submit-btn">Register</button>
+                                        <div className="d-flex justify-content-end w-100">
+                                        <span onClick={handleForgotPasswordLinkClick} className="link-text">Forgot Password?</span>
+                                        </div>
+                                        <div className="col-lg-12 action-wrapper">
+                                            <button type="submit" className="submit-btn w-100 mb-60">Login</button>
+                                            
+                                            <div className="d-flex align-items-center flex-column w-100">
+                                                <span className="static-text">Do you have an account?</span>
+                                                <button type="button" onClick={handleRegisterLinkClick} className="btn-outline w-100">Register</button>
+                                            </div>
                                         </div>
 
                                         {/*}  <div className="lined-text"><span><strong>Login</strong> with Others</span></div>

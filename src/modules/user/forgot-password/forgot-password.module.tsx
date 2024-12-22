@@ -7,9 +7,9 @@ export const ForgotPasswordModule = () => {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-12">
-                        <div className="row">
+                        <div className="row justify-content-center">
 
-                            <div className="col-lg-6 login-form-wrapper">
+                            <div className="col-lg-6 login-form-wrapper all-border-radius">
                                 <form className="login-form" onSubmit={form.handleSubmit} noValidate>
                                     <h3>GENERATE OTP</h3>
 
@@ -65,12 +65,12 @@ export const ForgotPasswordModule = () => {
                                     }
 
                                     {formError != "" && (<span className="error-text">{formError}</span>)}
+                                    <span onClick={handleLoginClick} className="link-text">Back to Login</span>
                                     <div className="col-lg-12 row"
                                         style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
 
-                                        <button type="submit" className="submit-btn">{action == "otp" ? "Generate OTP" : "Reset Password"}</button>
+                                        <button type="submit" className="submit-btn w-100">{action == "otp" ? "Generate OTP" : "Reset Password"}</button>
 
-                                        <button type="button" onClick={handleLoginClick} className="submit-btn">Login</button>
 
                                     </div>
 
