@@ -31,7 +31,7 @@ function MainChatComponent({querMasterID,setQueryMasterID,currentUser,queryType}
                                     <Fragment key={index}>
                                         {msg.sender == "user" && <ChatRequestComponent  key={index} message={msg.text} />}
                                         {msg.sender == "ai" && queryType==1 && <ChatResponseComponent key={index} message={msg.text} />}
-                                        {msg.sender == "ai" && queryType==2 && <AudioPlayerComponent key={index} base64Audio={msg.text} />}
+                                        {msg.sender == "ai" && queryType==2 && <ChatAudioResponseComponent message={msg.text} />}
                                     </Fragment>
 
                                 ))}

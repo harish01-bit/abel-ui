@@ -19,7 +19,7 @@ const AudioPlayerComponent = ({ base64Audio }: props) => {
     return (
         <div>
             {/* Audio Icon (e.g., Font Awesome) */}
-            <button onClick={handlePlayAudio} style={{ cursor: "pointer" }}>
+            <button onClick={handlePlayAudio} className="btn btn-light btn-md btn-pill new-chat-btn">
                 Play
             </button>
 

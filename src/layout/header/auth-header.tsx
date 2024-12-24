@@ -20,7 +20,7 @@ function AuthHeaderComponent() {
                 <div className="tyn-appbar-content">
                     <ul className="tyn-appbar-nav tyn-appbar-nav-start">
                         <NavigateLink link="/chat" text="Text Chat" />
-                        <NavigateLink link="/audio" text="Audio Chat" />
+                        {AuthenticationService.currentUser?.roleID == 1 && <NavigateLink link="/audio" text="Audio Chat" />}
 
                     </ul>
                     {/* .tyn-appbar-nav */}

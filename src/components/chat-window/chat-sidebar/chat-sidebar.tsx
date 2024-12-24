@@ -46,7 +46,7 @@ function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar,
                     </ul>
                     <ul>
                         <li>
-                            Recent
+                            Recent {queryType==1 ? ' Text Chat':' Audio Chat '}
                         </li>
                     </ul>
                 </div>

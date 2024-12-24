@@ -8,6 +8,6 @@ type Props = {
 function NavigateLink({ text, link }: Props) {
 
 
-    return <Link to={link}>{text}</Link>;
+    return <Link className='btn btn-light btn-md btn-pill new-chat-btn' to={link}>{text}</Link>;
 }
 export default NavigateLink;

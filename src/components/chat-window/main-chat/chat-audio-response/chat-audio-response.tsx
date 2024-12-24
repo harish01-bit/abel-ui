@@ -1,5 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 import RenderText from "../../../ui-component/render-text/render-text";
+import AudioPlayerComponent from "../../../ui-component/audio-player/audio-player";
 
 type Props = {
     message: string
@@ -12,7 +13,7 @@ function ChatAudioResponseComponent({ message }: Props) {
             <div className="text-wrapper">
                 <img src="/letter-a.gif" className="a-gif"/>
                 <div className="content  text-wrapper">
-                    <RenderText text={message} />
+                   <AudioPlayerComponent base64Audio={message}/>
                 </div>
             </div>
 
