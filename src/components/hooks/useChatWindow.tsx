@@ -3,7 +3,7 @@ import { ChatApiService } from "../../middleware/services/chat-api.service";
 import { useGetClientChatListMutate, useGetLatestQueryListMutate, usePollResponsetate, useSendMessageMutate } from "../../middleware/hooks/useChatApi";
 import { AuthenticationService } from "../../helpers/authetication.service";
 
-export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: any) => {
+export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,queryType}: any) => {
 
     const [messages, setMessages] = useState<Array<any>>([]);
     const [input, setInput] = useState("");
@@ -28,10 +28,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
     } = usePollResponsetate();
 
 
-    const {
-        mutateAsync: getLatestUserQueryList
-    } = useGetLatestQueryListMutate();
-
+ 
     const {
         mutateAsync: getClientChatList
     } = useGetClientChatListMutate();
@@ -43,7 +40,8 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
         getClientChatList({
             queryMasterID: querMasterID,
             userID: currentUser.userID,
-            tenantID: currentUser.tenantID
+            tenantID: currentUser.tenantID,
+            queryType:queryType
         }).then(res => {
             if (res?.isSuccess) {
                 if (res.clientQueryList?.length > 0) {
@@ -95,7 +93,8 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
             queryMasterID: querMasterID,
             query: input,
             title: "Able Message",
-            fileString: null
+
+            queryType:queryType
         })
 
         if (sendMessageResponse?.isSuccess) {
@@ -121,6 +120,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser }: a
             tenantID: currentUser.tenantID,
             queryMasterID: clientQueryModel.clientQueryMasterID, // 0 for new chat
             queryID: clientQueryModel.clientQueryID,
+            queryType:queryType
 
         })
 

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { LoginPage } from "../pages/login/login";
 import { RegisterPage } from "../pages/register/register";
 import { ForgotPasswordModule } from "../modules/user/forgot-password/forgot-password.module";
+import AudioChatPage from "../pages/audio/audio-chat";
 
 
 function AppRoute() {
@@ -26,6 +27,11 @@ function AppRoute() {
         {
             path: '/chat',
             element: <ChatPage />,
+        },
+        {
+            path: '/audio',
+            index: true,
+            element: <AudioChatPage />,
         },
     ])
 }

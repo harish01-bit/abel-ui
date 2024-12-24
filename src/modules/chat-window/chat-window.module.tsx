@@ -3,8 +3,10 @@ import ChatSideBarComponent from "../../components/chat-window/chat-sidebar/chat
 import MainChatComponent from "../../components/chat-window/main-chat/main-chat";
 import { useChatWindowModule } from "../hooks/useChatWindowModule";
 
-
-const ChatWindow = () => {
+type Props = {
+  queryType :number
+}
+const ChatWindow = ({queryType}:Props) => {
   const {
     querMasterID, setQueryMasterID, collapseSidebar,
     handleCollapseSidebar, handleNewChat, currentUser
@@ -17,10 +19,12 @@ const ChatWindow = () => {
         <Fragment>
           <ChatSideBarComponent 
                currentUser={currentUser} 
+               queryType = {queryType}
                querMasterID={querMasterID}
           newChat={handleNewChat} setQueryMasterID={setQueryMasterID} collapseSidebar={collapseSidebar} handleCollapseSidebar={handleCollapseSidebar} />
 
           <MainChatComponent
+          queryType={queryType}
           currentUser={currentUser} 
           querMasterID={querMasterID} 
           setQueryMasterID={setQueryMasterID} />

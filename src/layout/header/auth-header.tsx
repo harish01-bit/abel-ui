@@ -1,3 +1,4 @@
+import NavigateLink from "../../components/ui-component/navigate-link/navigate-link";
 import { AuthenticationService } from "../../helpers/authetication.service";
 
 function AuthHeaderComponent() {
@@ -11,13 +12,15 @@ function AuthHeaderComponent() {
             <div className="tyn-appbar-wrap">
                 <div className="tyn-appbar-logo">
                     <a className="tyn-logo" href="index.html">
-                        <img src="/letter-a.gif" className="a-gif"/>
+                        <img src="/letter-a.gif" className="a-gif" />
                         Abel
                     </a>
                 </div>
                 {/* .tyn-appbar-logo */}
                 <div className="tyn-appbar-content">
                     <ul className="tyn-appbar-nav tyn-appbar-nav-start">
+                        <NavigateLink link="/chat" text="Text Chat" />
+                        <NavigateLink link="/audio" text="Audio Chat" />
 
                     </ul>
                     {/* .tyn-appbar-nav */}
@@ -27,7 +30,7 @@ function AuthHeaderComponent() {
                                 onClick={logOut}
                                 className="tyn-appbar-link dropdown-toggle"
                                 data-bs-toggle="dropdown"
-                             
+
                                 data-bs-offset="0,10"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-power" viewBox="0 0 16 16">

@@ -5,17 +5,20 @@ import ChatRequestComponent from "./chat-request/chat-request";
 import ChatResponseComponent from "./chat-response/chat-response";
 import AuthHeaderComponent from "../../../layout/header/auth-header";
 import { MdOutlineAttachment } from "react-icons/md";
+import ChatAudioResponseComponent from "./chat-audio-response/chat-audio-response";
+import AudioPlayerComponent from "../../ui-component/audio-player/audio-player";
 
 type Props = {
     querMasterID :any
     setQueryMasterID:any
     currentUser:any
+    queryType:number
 
 }
 
-function MainChatComponent({querMasterID,setQueryMasterID,currentUser}:Props) {
+function MainChatComponent({querMasterID,setQueryMasterID,currentUser,queryType}:Props) {
 
-    const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow({querMasterID,setQueryMasterID,currentUser});
+    const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow({querMasterID,setQueryMasterID,currentUser,queryType});
     return (
         <>
             <div className="chat-main">
@@ -27,8 +30,8 @@ function MainChatComponent({querMasterID,setQueryMasterID,currentUser}:Props) {
                                 {messages.map((msg, index) => (
                                     <Fragment key={index}>
                                         {msg.sender == "user" && <ChatRequestComponent  key={index} message={msg.text} />}
-                                        {msg.sender == "ai" && <ChatResponseComponent key={index} message={msg.text} />}
-                                    
+                                        {msg.sender == "ai" && queryType==1 && <ChatResponseComponent key={index} message={msg.text} />}
+                                        {msg.sender == "ai" && queryType==2 && <AudioPlayerComponent key={index} base64Audio={msg.text} />}
                                     </Fragment>
 
                                 ))}

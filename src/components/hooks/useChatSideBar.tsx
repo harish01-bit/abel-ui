@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetLatestQueryMasterListMutate } from "../../middleware/hooks/useChatApi";
 
 
-export const useChatSideBar = ({ newChat, handleCollapseSidebar, currentUser,setQueryMasterID }: any) => {
+export const useChatSideBar = ({ newChat, handleCollapseSidebar, currentUser,setQueryMasterID,queryType }: any) => {
 
     const [querymasterList, setQueryMasterList] = useState<Array<any>>([]);
     const {
@@ -22,7 +22,8 @@ export const useChatSideBar = ({ newChat, handleCollapseSidebar, currentUser,set
     useEffect(() => {
         getLatestUserQueryMasterList({
             userID: currentUser?.userID,
-            tenantID: currentUser.tenantID
+            tenantID: currentUser.tenantID,
+            queryType:queryType
         }).then(res => {
 
             if (res?.isSuccess) {
