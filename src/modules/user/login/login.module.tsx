@@ -42,7 +42,7 @@ export const LoginModule = () => {
 
                                             placeholder="User Email"
                                         />
-                                        {form.errors.userEmail && typeof form.errors.userEmail === "string" && (<span className="error-text">{form.errors.userEmail}</span>)}
+                                        {form.errors.userEmail && typeof form.errors.userEmail === "string" && (<span className="error-text w-100">{form.errors.userEmail}</span>)}
 
                                         <input
                                             type="password"
@@ -54,7 +54,7 @@ export const LoginModule = () => {
 
                                             placeholder="Password"
                                         />     {form.errors.password && typeof form.errors.password === "string" && (<span className="error-text">{form.errors.password}</span>)}
-                                        {formError != "" && (<span className="error-text">{formError}</span>)}
+                                        {formError != "" && (<span className="error-text w-100">{formError}</span>)}
                                         <div className="d-flex justify-content-end w-100">
                                         <span onClick={handleForgotPasswordLinkClick} className="link-text">Forgot Password?</span>
                                         </div>

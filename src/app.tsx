@@ -7,6 +7,7 @@ import { useLoadAppConfig } from "./hooks/useLoadAppConfig";
 import { useEffect } from "react";
 import { AuthenticationService } from "./helpers/authetication.service";
 import useInactivityLogout from "./hooks/useInactivityLogOut";
+import './assets/styles/common.scss';
 
 export function SessionChk({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
