@@ -34,12 +34,13 @@
         }
     }
     .login-form-wrapper{
-        display: flex;
-        align-items: center;
-        justify-content: center;
         background: white;
         border-radius: 0 16px 16px 0;
-        display: flex;
+        .login-form-inner-wrapper{
+            display: flex;
+            align-items: center;
+            justify-content: center;    
+        }
         &.all-border-radius{
             border-radius: 16px;
         }
@@ -49,6 +50,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            max-width: 364px;
+        }
+        .form-control-wrapper{
+            width: 100%;
         }
         h3{
             text-align: center;
@@ -57,7 +63,7 @@
             text-align: center;
         }
         input{
-            width: 364px;
+            width: 100%;
             background: #F0EDFF !important;
             margin-bottom: 18px;
             border-radius: 16px;
@@ -142,6 +148,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+        }
+    }
+}
+
+@media  (max-width: 991px) {
+    .login-wrapper {
+        
+        .login-form-wrapper {
+            background: none;
+            .login-form-inner-wrapper{
+                background: white;
+                padding: 0 30px;
+                border-radius: 16px;
+            }
         }
     }
 }

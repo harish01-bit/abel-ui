@@ -13,17 +13,17 @@ type Props = {
     setQueryMasterID:any
     currentUser:any
     queryType:number
-
+    handleShowHideSideBar: any
 }
 
-function MainChatComponent({querMasterID,setQueryMasterID,currentUser,queryType}:Props) {
+function MainChatComponent({querMasterID,setQueryMasterID,currentUser,queryType,handleShowHideSideBar}:Props) {
 
     const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow({querMasterID,setQueryMasterID,currentUser,queryType});
     return (
         <>
             <div className="chat-main">
                 
-                    <AuthHeaderComponent />
+                    <AuthHeaderComponent handleShowHideSideBar={handleShowHideSideBar}/>
                     <div className="chat-wrapper">
                         <div className="message-container">
                             <div className="message-wrapper">

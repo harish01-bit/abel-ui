@@ -108,6 +108,9 @@
     .tyn-content.has-aside-base.collapse-sidebar{
       --aside-width: 86px;
       transition: all 0.5s ease;
+      .collapsed-item{
+        display: none;
+      }
     }
     .tyn-content-inner {
       padding: 2rem 1.25rem;
@@ -248,7 +251,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
+    justify-content: space-between;
     flex-shrink: 0;
     overflow: hidden;
     border-right: 1px solid var(--border-color);

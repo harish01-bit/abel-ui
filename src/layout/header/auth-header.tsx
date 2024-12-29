@@ -1,7 +1,8 @@
 import NavigateLink from "../../components/ui-component/navigate-link/navigate-link";
 import { AuthenticationService } from "../../helpers/authetication.service";
+import { MdMenu } from "react-icons/md";
 
-function AuthHeaderComponent() {
+function AuthHeaderComponent(props:any) {
 
     const logOut = () => {
         AuthenticationService.userLogout();
@@ -11,6 +12,9 @@ function AuthHeaderComponent() {
         <nav className="tyn-appbar">
             <div className="tyn-appbar-wrap">
                 <div className="tyn-appbar-logo">
+                    <span className="toggleIcon d-lg-none" onClick={props.handleShowHideSideBar}>
+                        <MdMenu />
+                    </span>
                     <a className="tyn-logo" href="index.html">
                         <img src="/letter-a.gif" className="a-gif" />
                         Abel

@@ -5,15 +5,14 @@ import { useChatSideBar } from "../../hooks/useChatSideBar";
 import { ChatMasterComponent } from "./chat-master/chat-master";
 
 
-function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID, querMasterID,queryType }: any) {
+function ChatSideBarComponent({ showNav, newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID, querMasterID,queryType }: any) {
     const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser,setQueryMasterID ,queryType});
 
- 
     return (
-        <div className={`tyn-aside tyn-aside-base ${collapseSidebar ? "collapse-sidebar" : ""}`}>
+        <div className={`tyn-aside tyn-aside-base ${showNav ? '' : 'hide-nav'}`}>
             <div className="tyn-aside-head">
                 <div className="tyn-aside-head-text">
-                    <span className="toggleIcon" onClick={handlerToggleSideBar}>
+                    <span className="toggleIcon d-none d-lg-block" onClick={handlerToggleSideBar}>
                         <MdMenu />
                     </span>
                     {/*<span className="tyn-subtext">200+ Conversations </span>*/}
@@ -44,7 +43,7 @@ function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar,
                             </a>
                         </li>
                     </ul>
-                    <ul>
+                    <ul className={`${collapseSidebar ? 'collapsed-item' : ''}`}>
                         <li>
                             Recent {queryType==1 ? ' Text Chat':' Audio Chat '}
                         </li>
@@ -53,7 +52,7 @@ function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar,
 
             </div>
 
-            <div className="tyn-aside-body" data-simplebar="">
+            <div className={`tyn-aside-body ${collapseSidebar ? 'collapsed-item' : ''}`} data-simplebar="">
                 <ul className="tyn-aside-list">
                     {querymasterList?.map(q =>
                         <ChatMasterComponent setQueryMasterID={setQueryMasterID} key={q.clientQueryMasterID} querMasterID={querMasterID} queryMaster={q} />
@@ -64,7 +63,7 @@ function ChatSideBarComponent({ newChat, collapseSidebar, handleCollapseSidebar,
 
             </div>
 
-            <SidebarBottomLinks />
+            <SidebarBottomLinks collapseSidebar/>
         </div>
     )
 

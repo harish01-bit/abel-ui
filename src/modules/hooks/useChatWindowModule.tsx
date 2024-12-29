@@ -3,7 +3,7 @@ import { AuthenticationService } from "../../helpers/authetication.service";
 
 export const useChatWindowModule= () => {
     const [querMasterID, setQueryMasterID] = useState<number>(0);
-    const [collapseSidebar,setCollapseSidebar] = useState<boolean>(false);
+    const [collapseSidebar,setCollapseSidebar] = useState<boolean>(window.outerWidth < 768 ? true : false);
     const [currentUser, setCurrentUser] = useState<any>({ ...AuthenticationService.currentUser }); // Load user state
 
 

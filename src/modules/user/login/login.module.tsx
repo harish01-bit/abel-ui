@@ -23,37 +23,41 @@ export const LoginModule = () => {
                     <div className="row justify-content-center">
                         <div className="col-lg-12">
                             <div className="row">
-                                <div className="col-lg-6 bg-wrapper">
+                                <div className="col-lg-6 bg-wrapper d-none d-lg-block">
                                     <div className="img-wrap">
 
                                     </div>
                                 </div>
                                 <div className="col-lg-6 login-form-wrapper">
+                                    <div className="login-form-inner-wrapper">
                                     <form className="login-form" onSubmit={form.handleSubmit} noValidate>
                                         <h3>LOGIN</h3>
+                                        <div className="form-control-wrapper">
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="userEmail"
+                                                id="userEmail"
+                                                value={form.values.userEmail}
+                                                onChange={form.handleChange}
 
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="userEmail"
-                                            id="userEmail"
-                                            value={form.values.userEmail}
-                                            onChange={form.handleChange}
+                                                placeholder="User Email"
+                                            />
+                                            {form.errors.userEmail && typeof form.errors.userEmail === "string" && (<span className="error-text w-100">{form.errors.userEmail}</span>)}
+                                        </div>
+                                        <div className="form-control-wrapper">
+                                            <input
+                                                type="password"
+                                                className="form-control mb-5-px"
+                                                id="password"
+                                                name="password"
+                                                value={form.values.password}
+                                                onChange={form.handleChange}
 
-                                            placeholder="User Email"
-                                        />
-                                        {form.errors.userEmail && typeof form.errors.userEmail === "string" && (<span className="error-text w-100">{form.errors.userEmail}</span>)}
-
-                                        <input
-                                            type="password"
-                                            className="form-control mb-5-px"
-                                            id="password"
-                                            name="password"
-                                            value={form.values.password}
-                                            onChange={form.handleChange}
-
-                                            placeholder="Password"
-                                        />     {form.errors.password && typeof form.errors.password === "string" && (<span className="error-text">{form.errors.password}</span>)}
+                                                placeholder="Password"
+                                            />     
+                                            {form.errors.password && typeof form.errors.password === "string" && (<span className="error-text w-100">{form.errors.password}</span>)}
+                                        </div>
                                         {formError != "" && (<span className="error-text w-100">{formError}</span>)}
                                         <div className="d-flex justify-content-end w-100">
                                         <span onClick={handleForgotPasswordLinkClick} className="link-text">Forgot Password?</span>
@@ -79,6 +83,7 @@ export const LoginModule = () => {
 
                                         {/* <a type="submit" onClick={handleRegisterLinkClick} className="submit-btn">Register</a> */}
                                     </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
