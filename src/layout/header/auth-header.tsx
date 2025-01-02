@@ -2,7 +2,7 @@ import NavigateLink from "../../components/ui-component/navigate-link/navigate-l
 import { AuthenticationService } from "../../helpers/authetication.service";
 import { MdMenu } from "react-icons/md";
 
-function AuthHeaderComponent(props:any) {
+function AuthHeaderComponent(props: any) {
 
     const logOut = () => {
         AuthenticationService.userLogout();
@@ -22,9 +22,13 @@ function AuthHeaderComponent(props:any) {
                 </div>
                 {/* .tyn-appbar-logo */}
                 <div className="tyn-appbar-content">
-                    <ul className="tyn-appbar-nav tyn-appbar-nav-start">
-                        <NavigateLink link="/chat" text="Text Chat" />
-                        {AuthenticationService.currentUser?.roleID == 1 && <NavigateLink link="/audio" text="Audio Chat" />}
+                    <ul className="tyn-appbar-nav ">
+                        <li className="tyn-appbar-item dropdown">
+                            <NavigateLink link="/chat" text="Text" />
+                        </li>
+                        <li className="tyn-appbar-item dropdown">
+                            {AuthenticationService.currentUser?.roleID == 1 && <NavigateLink link="/audio" text="Audio" />}
+                        </li>
 
                     </ul>
                     {/* .tyn-appbar-nav */}

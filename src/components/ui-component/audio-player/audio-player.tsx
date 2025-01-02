@@ -1,32 +1,31 @@
-import React, { useRef } from "react";
-type props = {
-    base64Audio: string
-}
-const AudioPlayerComponent = ({ base64Audio }: props) => {
-    // Reference to the audio element
-    const audioRef: any = useRef(null);
+import React from "react";
 
-    // Handle play button click
-    const handlePlayAudio = () => {
-        if (audioRef.current) {
-            audioRef.current.play();
-        }
-    };
+type Props = {
+  base64Audio: string;
+};
 
-    // Convert Base64 string to a Blob URL
-    const audioSrc = `data:audio/mp3;base64,${base64Audio}`;
+const AudioPlayerComponent = ({ base64Audio }: Props) => {
+  // Convert Base64 string to a data URL
+  const audioSrc = `data:audio/wav;base64,${base64Audio}`;
 
-    return (
-        <div>
-            {/* Audio Icon (e.g., Font Awesome) */}
-            <button onClick={handlePlayAudio} className="btn btn-light btn-md btn-pill new-chat-btn">
-                Play
-            </button>
+  // Handle download button click
+  const handleDownloadAudio = () => {
+    const link = document.createElement("a");
+    link.href = audioSrc;
+    link.download = "audio.wav"; // Set the file name
+    document.body.appendChild(link); // Required for Firefox
+    link.click();
+    document.body.removeChild(link); // Cleanup
+  };
 
-            {/* Hidden audio element */}
-            <audio ref={audioRef} src={audioSrc} />
-        </div>
-    );
+  return (
+    <div>
+      {/* Audio player with built-in controls */}
+      <audio controls src={audioSrc} />
+
+     
+    </div>
+  );
 };
 
 export default AudioPlayerComponent;
