@@ -7,6 +7,7 @@ import AuthHeaderComponent from "../../../layout/header/auth-header";
 import { MdOutlineAttachment } from "react-icons/md";
 import ChatAudioResponseComponent from "./chat-audio-response/chat-audio-response";
 import AudioPlayerComponent from "../../ui-component/audio-player/audio-player";
+import HeaderComponent from "../../../layout/header/header";
 
 type Props = {
     querMasterID :any
@@ -21,9 +22,11 @@ function MainChatComponent({querMasterID,setQueryMasterID,currentUser,queryType,
     const { handleSend, messages, setMessages,input,setInput,isProcessing } = useChatWindow({querMasterID,setQueryMasterID,currentUser,queryType});
     return (
         <>
+         
+         
             <div className="chat-main">
                 
-                    <AuthHeaderComponent handleShowHideSideBar={handleShowHideSideBar}/>
+                   
                     <div className="chat-wrapper">
                         <div className="message-container">
                             <div className="message-wrapper">
