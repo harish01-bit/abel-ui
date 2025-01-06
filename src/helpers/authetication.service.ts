@@ -39,7 +39,8 @@ export class AuthenticationService {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache',
-            'Authorization': 'Bearer ' + getLocalStorage("token")
+            'Authorization': 'Bearer ' + getLocalStorage("token"),
+            'User-Agent': navigator.userAgent
         }
     }
 

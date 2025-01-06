@@ -7,7 +7,7 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
           
-            const res = await fetch(baseUrl + "User/Autheticate", {
+            const res = await fetch(baseUrl + "User/Authenticate", {
                 method: 'post',
                 headers:AuthenticationService.getRequestHeaders(),
                 body: JSON.stringify(request)

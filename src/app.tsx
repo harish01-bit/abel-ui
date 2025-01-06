@@ -6,12 +6,13 @@ import { useAppconfig } from "./helpers/app-config.service";
 import { useLoadAppConfig } from "./hooks/useLoadAppConfig";
 import { useEffect } from "react";
 import { AuthenticationService } from "./helpers/authetication.service";
-import useInactivityLogout from "./hooks/useInactivityLogOut";
+
 import './assets/styles/common.scss';
+import useUserSesstion from "./hooks/useUserSession";
 
 export function SessionChk({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
-  useInactivityLogout(AuthenticationService.userLogout, 20 * 60 * 1000);
+  useUserSesstion(AuthenticationService.userLogout, 20 * 60 * 1000);
   useEffect(() => {
 
     if (AuthenticationService.chkUserLogin()) {
