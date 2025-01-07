@@ -10,7 +10,7 @@ type Props = {
 const ChatWindow = ({ queryType }: Props) => {
   const {
     querMasterID, setQueryMasterID, collapseSidebar,
-    handleCollapseSidebar, handleNewChat, currentUser
+    handleCollapseSidebar, handleNewChat, currentUser, setChatBehaviour, chatBehaviour
   } = useChatWindowModule();
   const [showNav, handleShowNav] = useState(window.outerWidth < 991 ? false : true);
   const handleShowHideSideBar = () => {
@@ -22,16 +22,19 @@ const ChatWindow = ({ queryType }: Props) => {
       {currentUser?.userID &&
         <Fragment>
           <ChatSideBarComponent
+            setChatBehaviour={setChatBehaviour}
             currentUser={currentUser}
             queryType={queryType}
             querMasterID={querMasterID}
-            newChat={handleNewChat} 
-            setQueryMasterID={setQueryMasterID} 
+            newChat={handleNewChat}
+            setQueryMasterID={setQueryMasterID}
             showNav={showNav}
-            collapseSidebar={collapseSidebar} 
+            collapseSidebar={collapseSidebar}
             handleCollapseSidebar={handleCollapseSidebar} />
 
           <MainChatComponent
+          
+            chatBehaviour={chatBehaviour}
             queryType={queryType}
             currentUser={currentUser}
             querMasterID={querMasterID}

@@ -5,8 +5,8 @@ import { useChatSideBar } from "../../hooks/useChatSideBar";
 import { ChatMasterComponent } from "./chat-master/chat-master";
 
 
-function ChatSideBarComponent({ showNav, newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID, querMasterID,queryType }: any) {
-    const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser,setQueryMasterID ,queryType});
+function ChatSideBarComponent({ showNav, newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID, querMasterID,queryType ,setChatBehaviour}: any) {
+    const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser,setQueryMasterID ,queryType,setChatBehaviour});
 
     return (
         <div className={`tyn-aside tyn-aside-base ${showNav ? '' : 'hide-nav'}`}>
@@ -55,7 +55,7 @@ function ChatSideBarComponent({ showNav, newChat, collapseSidebar, handleCollaps
             <div className={`tyn-aside-body ${collapseSidebar ? 'collapsed-item' : ''}`} data-simplebar="">
                 <ul className="tyn-aside-list">
                     {querymasterList?.map(q =>
-                        <ChatMasterComponent setQueryMasterID={setQueryMasterID} key={q.clientQueryMasterID} querMasterID={querMasterID} queryMaster={q} />
+                        <ChatMasterComponent setChatBehaviour={setChatBehaviour}   setQueryMasterID={setQueryMasterID} key={q.clientQueryMasterID} querMasterID={querMasterID} queryMaster={q} />
                     )
 
                     }

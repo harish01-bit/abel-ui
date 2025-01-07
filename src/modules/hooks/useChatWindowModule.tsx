@@ -3,6 +3,7 @@ import { AuthenticationService } from "../../helpers/authetication.service";
 
 export const useChatWindowModule= () => {
     const [querMasterID, setQueryMasterID] = useState<number>(0);
+    const [chatBehaviour, setChatBehaviour] = useState<number>(0);
     const [collapseSidebar,setCollapseSidebar] = useState<boolean>(window.outerWidth < 768 ? true : false);
     const [currentUser, setCurrentUser] = useState<any>({ ...AuthenticationService.currentUser }); // Load user state
 
@@ -21,10 +22,12 @@ export const useChatWindowModule= () => {
     }
     // Function to clear the chat value
     const handleNewChat = () => {
-      setQueryMasterID(0) // Clear the value
+      setQueryMasterID(0) 
+      setChatBehaviour(0)// Clear the value
+      
     };
     return {
         querMasterID,setQueryMasterID,collapseSidebar,setCollapseSidebar,
-        handleCollapseSidebar,handleNewChat,currentUser
+        handleCollapseSidebar,handleNewChat,currentUser,chatBehaviour,setChatBehaviour
     }
 }
