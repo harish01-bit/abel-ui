@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@microsoft/signalr": "^8.0.7",
     "cra-template-typescript": "1.2.0",
     "formik": "^2.4.6",
     "html-react-parser": "^5.2.0",

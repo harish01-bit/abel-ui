@@ -2,12 +2,15 @@ import { use, useEffect, useRef, useState } from "react";
 import { ChatApiService } from "../../middleware/services/chat-api.service";
 import { useGetClientChatListMutate, useGetLatestQueryListMutate, usePollResponsetate, useSendMessageMutate } from "../../middleware/hooks/useChatApi";
 import { AuthenticationService } from "../../helpers/authetication.service";
-
-export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,queryType}: any) => {
+import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
+export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, queryType }: any) => {
 
     const [messages, setMessages] = useState<Array<any>>([]);
+    const [curQueryID, setCurQueryID] = useState<number>(0);
+    const [chatResponse, setChatResponse] = useState<any>(null);
     const [input, setInput] = useState("");
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
+    const connection = useRef<HubConnection | null>(null);
     const service = new ChatApiService();
 
     const pollingInterval = 1000; // 1 second
@@ -23,12 +26,43 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,quer
         mutateAsync: sendMessage
     } = useSendMessageMutate();
 
-    const {
+  /*  const {
         mutateAsync: pollResponse
-    } = usePollResponsetate();
+    } = usePollResponsetate();*/
+    useEffect(() => {
+        connectToSignalR();
+    }, [])
 
+    const connectToSignalR = () => {
+        connection.current = new HubConnectionBuilder()
+            .withUrl("https://localhost:44320/chatresponse")
+            .build();
 
- 
+        connection.current
+            .start()
+            .then(() => {
+                connection.current?.invoke("JoinGroup", queryType == 1 ? "Text" : "Audio"); // Join the group
+
+            })
+            .catch((err) => {
+
+            });
+        connection.current.on("ReceiveResponse", (requestID: number, clientQueryModel: any) => {
+            // This is where you will receive the response from the SignalR server
+            setChatResponse(clientQueryModel)
+
+        });
+    };
+    useEffect(() => {
+       
+        if (curQueryID == chatResponse?.clientQueryID) {
+
+            appendMessage(chatResponse?.response, "ai");
+
+            setIsProcessing(false);
+        }
+    }, [chatResponse, curQueryID]);
+
     const {
         mutateAsync: getClientChatList
     } = useGetClientChatListMutate();
@@ -41,12 +75,12 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,quer
             queryMasterID: querMasterID,
             userID: currentUser.userID,
             tenantID: currentUser.tenantID,
-            queryType:queryType
+            queryType: queryType
         }).then(res => {
             if (res?.isSuccess) {
                 if (res.clientQueryList?.length > 0) {
                     res.clientQueryList?.forEach((q: any) => {
-                       
+
                         appendMessage(q.request, "user")
                         appendMessage(q.response, "ai")
 
@@ -94,17 +128,19 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,quer
             query: input,
             title: "Able Message",
 
-            queryType:queryType
+            queryType: queryType
         })
 
         if (sendMessageResponse?.isSuccess) {
             if (querMasterID == 0) {
                 setQueryMasterID(sendMessageResponse.clientQueryMasterID)
+
             }
 
-            intervalId = setInterval(async () => {
+            setCurQueryID(sendMessageResponse?.clientQueryModel?.clientQueryID)
+            /*intervalId = setInterval(async () => {
                 PollMessageResponse(sendMessageResponse)
-            }, pollingInterval);
+            }, pollingInterval);*/
         }
         else {
             appendMessage("Sorry, something went wrong!", "ai")
@@ -112,7 +148,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,quer
         }
 
     };
-    const PollMessageResponse = async (sendMessageResponse: any) => {
+   /* const PollMessageResponse = async (sendMessageResponse: any) => {
         elapsedTime += pollingInterval;
         const { clientQueryModel } = sendMessageResponse;
         const res = await pollResponse({
@@ -120,7 +156,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,quer
             tenantID: currentUser.tenantID,
             queryMasterID: clientQueryModel.clientQueryMasterID, // 0 for new chat
             queryID: clientQueryModel.clientQueryID,
-            queryType:queryType
+            queryType: queryType
 
         })
 
@@ -144,6 +180,6 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser,quer
             setIsProcessing(false);
         }
 
-    }
+    }*/
     return { messages, setMessages, handleSend, input, setInput, isProcessing }
 }
