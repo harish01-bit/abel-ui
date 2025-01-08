@@ -6,7 +6,7 @@ export class UserApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
 
-            const res = await fetch(baseUrl + "User/GetUserSettings", {
+            const res = await fetch(baseUrl + "api/User/GetUserSettings", {
                 method: 'post',
                 headers: AuthenticationService.getRequestHeaders(),
                 body: JSON.stringify(request)
@@ -31,7 +31,7 @@ export class UserApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
 
-            const res = await fetch(baseUrl + "User/SaveUserSettings", {
+            const res = await fetch(baseUrl + "api/User/SaveUserSettings", {
                 method: 'post',
                 headers: AuthenticationService.getRequestHeaders(),
                 body: JSON.stringify(request)

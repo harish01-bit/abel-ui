@@ -37,20 +37,16 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         connection.current = new HubConnectionBuilder()
             .withUrl("https://localhost:44320/chatresponse")
             .build();
-
         connection.current
             .start()
             .then(() => {
-                connection.current?.invoke("JoinGroup", queryType == 1 ? "Text" : "Audio"); // Join the group
+                connection.current?.invoke("JoinGroup", queryType == 1 ? "Text" : "Audio"); 
 
             })
             .catch((err) => {
-
             });
         connection.current.on("ReceiveResponse", (requestID: number, clientQueryModel: any) => {
-            // This is where you will receive the response from the SignalR server
             setChatResponse(clientQueryModel)
-
         });
     };
     useEffect(() => {

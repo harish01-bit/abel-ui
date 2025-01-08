@@ -7,7 +7,7 @@ export class ChatApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
             
-            const res = await restClient(baseUrl + "Client/ProcessClientQuery", {
+            const res = await restClient(baseUrl + "api/Client/ProcessClientQuery", {
                 method: 'post',
               
                 body: JSON.stringify(request)
@@ -30,7 +30,7 @@ export class ChatApiService {
     pollForResponse = async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            const res = await restClient(baseUrl + "Client/GetClientQuery", {
+            const res = await restClient(baseUrl + "api/Client/GetClientQuery", {
                 method: 'post',
                 
                 body: JSON.stringify(request)
@@ -50,7 +50,7 @@ export class ChatApiService {
     getLatestUserQueryList=async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            const res = await restClient(baseUrl + "Client/GetLatestUserQueryList", {
+            const res = await restClient(baseUrl + "api/Client/GetLatestUserQueryList", {
                 method: 'post',
                 
                 body: JSON.stringify(request)
@@ -69,7 +69,7 @@ export class ChatApiService {
     getLatestUserQueryMasterList=async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            const res = await restClient(baseUrl + "Client/GetUserQueryMasterList", {
+            const res = await restClient(baseUrl + "api/Client/GetUserQueryMasterList", {
                 method: 'post',
                 
                 body: JSON.stringify(request)
@@ -88,7 +88,7 @@ export class ChatApiService {
     getClientChatList=async (request: any) => {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
-            const res = await restClient(baseUrl + "Client/GetUserQueryList", {
+            const res = await restClient(baseUrl + "api/Client/GetUserQueryList", {
                 method: 'post',
                 
                 body: JSON.stringify(request)
