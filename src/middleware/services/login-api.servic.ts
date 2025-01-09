@@ -7,7 +7,7 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
           
-            const res = await fetch(baseUrl + "User/Authenticate", {
+            const res = await fetch(baseUrl + "api/User/Authenticate", {
                 method: 'post',
                 headers:AuthenticationService.getRequestHeaders(),
                 body: JSON.stringify(request)
@@ -31,7 +31,7 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
           
-            const res = await fetch(baseUrl + "User/Register", {
+            const res = await fetch(baseUrl + "api/User/Register", {
                 method: 'post',
                 headers:AuthenticationService.getRequestHeaders(),
                 body: JSON.stringify(request)
@@ -55,7 +55,7 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
        
-            const res = await restClient(baseUrl + "User/RefreshToken", {
+            const res = await restClient(baseUrl + "api/User/RefreshToken", {
                 method: 'post',
               
                 body: JSON.stringify(request)
@@ -79,7 +79,7 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
        
-            const res = await restClient(baseUrl + "User/GenerateOTP", {
+            const res = await restClient(baseUrl + "api/User/GenerateOTP", {
                 method: 'post',
               
                 body: JSON.stringify(request)
@@ -103,7 +103,7 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
        
-            const res = await restClient(baseUrl + "User/ResetPassword", {
+            const res = await restClient(baseUrl + "api/User/ResetPassword", {
                 method: 'post',
               
                 body: JSON.stringify(request)
@@ -129,7 +129,7 @@ export class LoginApiService {
         try {
             const baseUrl = AppConfigUtil.appconfig.serviceUrl;
        
-            const res = await restClient(baseUrl + "User/VerifyEmail", {
+            const res = await restClient(baseUrl + "api/User/VerifyEmail", {
                 method: 'post',
               
                 body: JSON.stringify(request)
