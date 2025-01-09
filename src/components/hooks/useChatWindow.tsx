@@ -3,6 +3,7 @@ import { ChatApiService } from "../../middleware/services/chat-api.service";
 import { useGetClientChatListMutate, useGetLatestQueryListMutate, usePollResponsetate, useSendMessageMutate } from "../../middleware/hooks/useChatApi";
 import { AuthenticationService } from "../../helpers/authetication.service";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
+import { AppConfigUtil } from "../../helpers/app-config-util";
 export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, queryType }: any) => {
 
     const [messages, setMessages] = useState<Array<any>>([]);
@@ -35,7 +36,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
     const connectToSignalR = () => {
         connection.current = new HubConnectionBuilder()
-            .withUrl("https://localhost:44320/chatresponse")
+            .withUrl(AppConfigUtil.appconfig.serviceUrl+"chatresponse")
             .build();
         connection.current
             .start()
