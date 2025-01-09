@@ -2,7 +2,7 @@ import { use, useEffect, useRef, useState } from "react";
 import { ChatApiService } from "../../middleware/services/chat-api.service";
 import { useGetClientChatListMutate, useGetLatestQueryListMutate, usePollResponsetate, useSendMessageMutate } from "../../middleware/hooks/useChatApi";
 import { AuthenticationService } from "../../helpers/authetication.service";
-import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
+import { HubConnectionBuilder, HubConnection, HttpTransportType } from "@microsoft/signalr";
 import { AppConfigUtil } from "../../helpers/app-config-util";
 export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, queryType }: any) => {
 
@@ -32,11 +32,19 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
     } = usePollResponsetate();*/
     useEffect(() => {
         connectToSignalR();
+        return () => {
+            if (connection.current) {
+                connection.current.stop().catch((err) => {
+                    console.error("Error while stopping SignalR connection:", err);
+                });
+            }
+        };
     }, [])
 
     const connectToSignalR = () => {
         connection.current = new HubConnectionBuilder()
-            .withUrl(AppConfigUtil.appconfig.serviceUrl+"chatresponse")
+            .withUrl(AppConfigUtil.appconfig.serviceUrl+"chatresponse",{  transport: HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling})
+            
             .build();
         connection.current
             .start()
