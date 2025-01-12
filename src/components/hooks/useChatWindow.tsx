@@ -8,6 +8,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
     const [messages, setMessages] = useState<Array<any>>([]);
     const [curQueryID, setCurQueryID] = useState<number>(0);
+
     const [chatResponse, setChatResponse] = useState<any>(null);
     const [input, setInput] = useState("");
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -27,9 +28,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         mutateAsync: sendMessage
     } = useSendMessageMutate();
 
-  /*  const {
-        mutateAsync: pollResponse
-    } = usePollResponsetate();*/
+    
     useEffect(() => {
         connectToSignalR();
         return () => {
@@ -43,13 +42,13 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
     const connectToSignalR = () => {
         connection.current = new HubConnectionBuilder()
-            .withUrl(AppConfigUtil.appconfig.serviceUrl+"chatresponse",{  transport: HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling})
-            
+            .withUrl(AppConfigUtil.appconfig.serviceUrl + "chatresponse", { transport: HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling })
+
             .build();
         connection.current
             .start()
             .then(() => {
-                connection.current?.invoke("JoinGroup", queryType == 1 ? "Text" : "Audio"); 
+                connection.current?.invoke("JoinGroup", queryType == 1 ? "Text" : "Audio");
 
             })
             .catch((err) => {
@@ -59,7 +58,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         });
     };
     useEffect(() => {
-       
+
         if (curQueryID == chatResponse?.clientQueryID) {
 
             appendMessage(chatResponse?.response, "ai");
@@ -105,15 +104,19 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
 
     useEffect(() => {
+        
         if (querMasterID == 0) {
+            setIsProcessing(false)
             setMessages([])
         }
         else {
-
+        
+            if(curQueryID==0)
             getClientChatListWithMasterID();
         }
 
     }, [querMasterID])
+  
     const appendMessage = (message: string, sender: string) => {
 
 
@@ -138,10 +141,10 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
         if (sendMessageResponse?.isSuccess) {
             if (querMasterID == 0) {
-                setQueryMasterID(sendMessageResponse.clientQueryMasterID)
+                setQueryMasterID(sendMessageResponse?.clientQueryModel?.clientQueryMasterID)
 
             }
-
+           
             setCurQueryID(sendMessageResponse?.clientQueryModel?.clientQueryID)
             /*intervalId = setInterval(async () => {
                 PollMessageResponse(sendMessageResponse)
@@ -153,38 +156,38 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         }
 
     };
-   /* const PollMessageResponse = async (sendMessageResponse: any) => {
-        elapsedTime += pollingInterval;
-        const { clientQueryModel } = sendMessageResponse;
-        const res = await pollResponse({
-            userID: currentUser.userID,
-            tenantID: currentUser.tenantID,
-            queryMasterID: clientQueryModel.clientQueryMasterID, // 0 for new chat
-            queryID: clientQueryModel.clientQueryID,
-            queryType: queryType
-
-        })
-
-        if (res?.isSuccess) {
-            if (res?.clientQueryModel?.processStatus == 2) {
-                clearInterval(intervalId);
-                appendMessage(res?.clientQueryModel?.response, "ai");
-                setIsProcessing(false);
-            }
-
-        }
-        else {
-            clearInterval(intervalId);
-            appendMessage("Sorry, something went wrong!", "ai")
-            setIsProcessing(false);
-
-        }
-        if (elapsedTime >= pollingDuration) {
-            clearInterval(intervalId);
-            appendMessage("No Response", "ai")
-            setIsProcessing(false);
-        }
-
-    }*/
+    /* const PollMessageResponse = async (sendMessageResponse: any) => {
+         elapsedTime += pollingInterval;
+         const { clientQueryModel } = sendMessageResponse;
+         const res = await pollResponse({
+             userID: currentUser.userID,
+             tenantID: currentUser.tenantID,
+             queryMasterID: clientQueryModel.clientQueryMasterID, // 0 for new chat
+             queryID: clientQueryModel.clientQueryID,
+             queryType: queryType
+ 
+         })
+ 
+         if (res?.isSuccess) {
+             if (res?.clientQueryModel?.processStatus == 2) {
+                 clearInterval(intervalId);
+                 appendMessage(res?.clientQueryModel?.response, "ai");
+                 setIsProcessing(false);
+             }
+ 
+         }
+         else {
+             clearInterval(intervalId);
+             appendMessage("Sorry, something went wrong!", "ai")
+             setIsProcessing(false);
+ 
+         }
+         if (elapsedTime >= pollingDuration) {
+             clearInterval(intervalId);
+             appendMessage("No Response", "ai")
+             setIsProcessing(false);
+         }
+ 
+     }*/
     return { messages, setMessages, handleSend, input, setInput, isProcessing }
 }
