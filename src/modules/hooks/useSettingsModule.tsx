@@ -1,13 +1,15 @@
 import { useFormik } from "formik";
 import { AuthenticationService } from "../../helpers/authetication.service";
-import { useGetUserSettings, useSaveUserSettings } from "../../middleware/hooks/useUserApi";
+
 import { useState } from "react";
+import { useGetUserSettings, useGetUseSettingsDataList, useSaveUserSettings } from "../../middleware/hooks/useUserSettingsApi";
 
 export const useSettingsModule = () => {
     const userID = AuthenticationService.currentUser.userID
     const [formError, setFormError] = useState<string>("")
   
     const { data: userSettings, isLoading } = useGetUserSettings({ requestID: userID });
+    const { data: userSettingsData, isLoading:isisUserSettingsLoaded } = useGetUseSettingsDataList();
     const {
 
         mutateAsync: saveUserSettings
@@ -16,7 +18,7 @@ export const useSettingsModule = () => {
     const form = useFormik<any>({
         initialValues: {
             chatBehaviour: userSettings?.userSettings?.chatBehaviour,
-
+            purgeFrequency: userSettings?.userSettings?.purgeFrequency
 
         },
         validateOnChange: false,
@@ -27,7 +29,8 @@ export const useSettingsModule = () => {
             setFormError("")
             const res = await saveUserSettings({
                 userID: userID,
-                chatBehaviour:parseInt(values.chatBehaviour)
+                chatBehaviour:parseInt(values.chatBehaviour),
+                purgeFrequency:parseInt(values.purgeFrequency)
             })
             if (res?.isSuccess) {
                 setFormError("Settings Saved Successfully!")
@@ -38,5 +41,5 @@ export const useSettingsModule = () => {
             }
         },
     });
-    return { userSettings, isLoading, form ,formError}
+    return { userSettings, isLoading, form ,formError,userSettingsData,isisUserSettingsLoaded}
 }
