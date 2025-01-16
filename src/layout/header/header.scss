@@ -112,3 +112,9 @@
       --nav-icon-svg-size:1.25rem;
     }
   }
+  @media (max-width: 991px) {
+    .tyn-appbar {
+        left: 0;
+        height: 64px;
+    }
+}
