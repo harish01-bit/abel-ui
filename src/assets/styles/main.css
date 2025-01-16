@@ -39,6 +39,12 @@ body {
   color: #1C1C1C;
 }
 
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
 .login-wrapper h3 {
   text-transform: uppercase;
   font-size: 30px;
@@ -77,6 +83,7 @@ body {
 .chat-main .chat-wrapper {
   overflow-y: auto;
   max-height: calc(100% - 88px);
+  height: 100%;
 }
 .chat-main .message-container {
   display: -webkit-box;
@@ -106,6 +113,7 @@ body {
   max-height: 100%;
   overflow-y: auto;
   max-width: 90%;
+  width: 90%;
   margin: 0 auto;
 }
 .chat-main .message-container .message-wrapper img.a-gif {
@@ -325,4 +333,74 @@ body {
   border-radius: 50%;
   background: #e2e8f0;
   margin-left: 5px;
+}
+
+@media (max-width: 991px) {
+  .has-aside-base {
+    padding-left: 0;
+  }
+  .tyn-appbar {
+    left: 0;
+    height: 64px;
+  }
+  .tyn-appbar .tyn-appbar-wrap {
+    height: 64px;
+  }
+  .tyn-aside {
+    position: fixed;
+    width: auto;
+    left: 0;
+    z-index: 1001;
+    top: 64px;
+    bottom: 0;
+    height: auto;
+    width: calc(100vw - 75px);
+    right: 75px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  .tyn-aside.hide-nav {
+    left: calc((100vw - 75px) * -1);
+  }
+  .tyn-appbar-logo {
+    position: fixed;
+    height: 64px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .tyn-appbar-logo .toggleIcon {
+    margin-right: 20px;
+  }
+  .chat-main .message-container .message-wrapper {
+    max-width: 100%;
+  }
+  .chat-main .message-container .message-wrapper .text-wrapper {
+    display: block;
+    padding: 8px 0;
+  }
+  .chat-main .message-container .group {
+    display: block;
+    padding: 8px 0 !important;
+  }
+  .chat-main .message-container .group .avtar {
+    margin-bottom: 10px;
+  }
+  .chat-main .message-container .group .text-wrapper {
+    width: 100%;
+  }
+  .tyn-appbar-content {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  .tyn-appbar-content ul {
+    margin-bottom: 0;
+  }
+  .tyn-appbar-content ul.tyn-appbar-nav-start {
+    display: none;
+  }
 }

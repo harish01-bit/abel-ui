@@ -1,0 +1,16 @@
+:root{
+    --aside-width:100%;
+}
+@media (min-width: 768px){
+    :root{
+        --aside-width:320px;
+    }
+}
+@media (min-width: 1400px) {
+    :root{
+        --aside-width: 360px;
+    }
+}
+.tyn-content.collapse-sidebar{
+    --aside-width: 86px;
+}

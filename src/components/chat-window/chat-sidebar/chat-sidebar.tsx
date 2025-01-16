@@ -3,7 +3,7 @@ import SidebarBottomLinks from "./chat-sidebar-bottom-link";
 import { MdMenu } from "react-icons/md";
 import { useChatSideBar } from "../../hooks/useChatSideBar";
 import { ChatMasterComponent } from "./chat-master/chat-master";
-
+import './chat-sidebar.scss';
 
 function ChatSideBarComponent({ showNav, newChat, collapseSidebar, handleCollapseSidebar, currentUser,setQueryMasterID, querMasterID,queryType ,setChatBehaviour}: any) {
     const { handleNewChat, handlerToggleSideBar, querymasterList } = useChatSideBar({ newChat, handleCollapseSidebar, currentUser,setQueryMasterID ,queryType,setChatBehaviour});

@@ -4,6 +4,7 @@ import { AuthenticationService } from "../../helpers/authetication.service";
 import { MdMenu } from "react-icons/md";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
+import './header.scss';
 
 function HeaderComponent(props: any) {
 
