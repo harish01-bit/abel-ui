@@ -17,7 +17,7 @@ const ChatWindow = ({ queryType }: Props) => {
     handleShowNav((c) => !c);
   }
   return (<div className="tyn-root">
-    <div className={`tyn-content tyn-content-full-height tyn-chatbot tyn-chatbot-page has-aside-base ${collapseSidebar ? "collapse-sidebar" : ""}`}>
+    <div className={`tyn-content tyn-content-full-height tyn-chatbot tyn-chatbot-page has-aside-base`}>
 
       {currentUser?.userID &&
         <Fragment>

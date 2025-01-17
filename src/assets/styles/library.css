@@ -105,11 +105,10 @@ dl {
     --aside-width:320px;
     transition: all 0.5s ease;
   }
-  .tyn-content.has-aside-base.collapse-sidebar{
-    --aside-width: 86px;
-    transition: all 0.5s ease;
-    .collapsed-item{
-      display: none;
+  .collapse-sidebar{
+    .tyn-content.has-aside-base{
+      transition: all 0.5s ease;
+      
     }
   }
   .tyn-content-inner {

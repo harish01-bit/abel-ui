@@ -18,6 +18,7 @@ export const useChatWindowModule= () => {
     }, [AuthenticationService.currentUser]);
 
     const handleCollapseSidebar = () => {
+      !collapseSidebar ? document.querySelector('body')?.classList.add('collapse-sidebar') : document.querySelector('body')?.classList.remove('collapse-sidebar');
       setCollapseSidebar((c) => !c);
     }
     // Function to clear the chat value

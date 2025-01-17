@@ -5,16 +5,18 @@ import { MdMenu } from "react-icons/md";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import './header.scss';
+import { useChatWindowModule } from "../../modules/hooks/useChatWindowModule";
 
 function HeaderComponent(props: any) {
 
     const logOut = () => {
         AuthenticationService.userLogout();
     }
-
+    const { collapseSidebar } = useChatWindowModule();
+    console.log(collapseSidebar)
     return (
       
-            <nav className="tyn-appbar">
+            <nav className={`tyn-appbar ${collapseSidebar ? 'collapse-sidebar' : ''}`}>
                 <div className="tyn-appbar-wrap">
                     <div className="tyn-appbar-logo">
                         <span className="toggleIcon d-lg-none" onClick={props.handleShowHideSideBar}>
