@@ -12,14 +12,14 @@ function HeaderComponent(props: any) {
     const logOut = () => {
         AuthenticationService.userLogout();
     }
-    const { collapseSidebar } = useChatWindowModule();
-    console.log(collapseSidebar)
+    const {showNav, handleShowHideSideBar} = useChatWindowModule();
+      console.log(showNav)
     return (
       
-            <nav className={`tyn-appbar ${collapseSidebar ? 'collapse-sidebar' : ''}`}>
+            <nav className={`tyn-appbar`}>
                 <div className="tyn-appbar-wrap">
                     <div className="tyn-appbar-logo">
-                        <span className="toggleIcon d-lg-none" onClick={props.handleShowHideSideBar}>
+                        <span className="toggleIcon d-lg-none" onClick={handleShowHideSideBar}>
                             <MdMenu />
                         </span>
                         <a className="tyn-logo" href="index.html">

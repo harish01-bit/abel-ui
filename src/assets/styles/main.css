@@ -346,22 +346,6 @@ body {
   .tyn-appbar .tyn-appbar-wrap {
     height: 64px;
   }
-  .tyn-aside {
-    position: fixed;
-    width: auto;
-    left: 0;
-    z-index: 1001;
-    top: 64px;
-    bottom: 0;
-    height: auto;
-    width: calc(100vw - 75px);
-    right: 75px;
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-  }
-  .tyn-aside.hide-nav {
-    left: calc((100vw - 75px) * -1);
-  }
   .tyn-appbar-logo {
     position: fixed;
     height: 64px;
