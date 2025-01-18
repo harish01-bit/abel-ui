@@ -22,7 +22,6 @@ dl {
 
 .tyn-content {
   --aside-bg:var(--bs-white);
-  --aside-width:100%;
   --aside-gap-x: var(--bs-body-gap-x);
   --aside-gap-y: 1.5rem;
   --aside-head-gap-y: 1.25rem;
@@ -102,14 +101,7 @@ dl {
     --appbar-height: 73px;
   }
   .tyn-content.has-aside-base, .tyn-content.has-aside-sticky {
-    --aside-width:320px;
     transition: all 0.5s ease;
-  }
-  .collapse-sidebar{
-    .tyn-content.has-aside-base{
-      transition: all 0.5s ease;
-      
-    }
   }
   .tyn-content-inner {
     padding: 2rem 1.25rem;
@@ -120,11 +112,6 @@ dl {
     visibility: visible;
     display: flex;
     overflow: hidden;
-  }
-}
-@media (min-width: 1400px) {
-  .tyn-content.has-aside-base, .tyn-content.has-aside-sticky {
-    --aside-width:360px;
   }
 }
 .tyn-logo {
@@ -1156,9 +1143,6 @@ dl {
   --form-bg:var(--bs-gray-800);
   --search-bg:var(--bs-gray-800);
   --form-input-bg:var(--bs-gray-900);
-}
-.tyn-chat-content {
-  --aside-width:320px;
 }
 .tyn-chat-content-aside {
   position: absolute;
