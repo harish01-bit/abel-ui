@@ -116,5 +116,14 @@
     .tyn-appbar {
         left: 0;
         height: 64px;
+        .tyn-appbar-content{
+          justify-content: flex-end;
+          ul{
+              margin-bottom: 0;
+          }
+          ul.tyn-appbar-nav:not(.tyn-appbar-nav-end){
+              display: none;
+          }
+      }
     }
 }
