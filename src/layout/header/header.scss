@@ -18,7 +18,9 @@
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
     left: var(--aside-width);
-
+    &.no-sidebar{
+      left: 0;
+    }
     + .tyn-content {
         margin-top: var(--appbar-height);
     }

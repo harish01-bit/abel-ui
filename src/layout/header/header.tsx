@@ -3,20 +3,21 @@ import NavigateLink from "../../components/ui-component/navigate-link/navigate-l
 import { AuthenticationService } from "../../helpers/authetication.service";
 import { MdMenu } from "react-icons/md";
 import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import './header.scss';
 import { useChatWindowModule } from "../../modules/hooks/useChatWindowModule";
 
 function HeaderComponent(props: any) {
-
+    const location = useLocation()
+    console.log(location)
     const logOut = () => {
         AuthenticationService.userLogout();
     }
-    const {showNav, handleShowHideSideBar} = useChatWindowModule();
-      console.log(showNav)
+    const {handleShowHideSideBar} = useChatWindowModule();
+
     return (
       
-            <nav className={`tyn-appbar`}>
+            <nav className={`tyn-appbar ${location.pathname === "/settings" ? 'no-sidebar' : ''}`}>
                 <div className="tyn-appbar-wrap">
                     <div className="tyn-appbar-logo">
                         <span className="toggleIcon d-lg-none" onClick={handleShowHideSideBar}>
