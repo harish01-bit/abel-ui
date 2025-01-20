@@ -9,7 +9,7 @@ import { useChatWindowModule } from "../../modules/hooks/useChatWindowModule";
 
 function HeaderComponent(props: any) {
     const location = useLocation()
-    console.log(location)
+
     const logOut = () => {
         AuthenticationService.userLogout();
     }

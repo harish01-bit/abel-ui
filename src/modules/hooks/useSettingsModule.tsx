@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useGetUserSettings, useGetUseSettingsDataList, useSaveUserSettings } from "../../middleware/hooks/useUserSettingsApi";
 
 export const useSettingsModule = () => {
-    const userID = AuthenticationService.currentUser.userID
+    const userID = AuthenticationService.currentUser?.userID
     const [formError, setFormError] = useState<string>("")
   
     const { data: userSettings, isLoading } = useGetUserSettings({ requestID: userID });

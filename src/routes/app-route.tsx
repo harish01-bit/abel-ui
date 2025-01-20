@@ -31,6 +31,11 @@ function AppRoute() {
                     index: false,
                     element: <SettingsPage />,
                 },
+                {
+                    path: '/audio',
+                    index: false,
+                    element: <AudioChatPage />,
+                }
             ]
         },
         {
@@ -45,11 +50,7 @@ function AppRoute() {
             element: <ForgotPasswordModule />,
         },
 
-        {
-            path: '/audio',
-            index: false,
-            element: <AudioChatPage />,
-        },
+        
     ])
 }
 export default AppRoute;
