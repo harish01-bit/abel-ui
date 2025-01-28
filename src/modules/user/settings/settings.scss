@@ -1,0 +1,37 @@
+.settings-wrapper{
+    padding-top: 72px;
+    background: white;
+    height: 100vh;
+    overflow-y: auto;
+    .inner-wrapper{
+        max-width: 60%;
+        margin: 0 auto;
+        padding: 40px 0;
+        .login-wrapper{
+            height: auto;
+            align-items: flex-start;
+        }
+    }
+    .nav{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        .nav-item{
+            margin: 0 10px;
+        }
+        .nav-link{
+            font-size: 16px;
+            font-weight: normal;
+            padding: 8px 10px;
+            min-width: 120px;
+            text-align: center;
+            color: var(--bs-body-color);
+            &.active{
+                background: #ECF4FD;
+                border-radius: 9999px;
+                color: var(--bs-body-color);
+                // border-bottom: 1px solid #33CCCC;
+            }
+        }
+    }
+}
