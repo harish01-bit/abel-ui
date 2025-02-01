@@ -26,6 +26,7 @@
             min-width: 120px;
             text-align: center;
             color: var(--bs-body-color);
+            cursor: pointer;
             &.active{
                 background: #ECF4FD;
                 border-radius: 9999px;

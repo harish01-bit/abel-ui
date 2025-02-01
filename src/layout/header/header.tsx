@@ -9,7 +9,7 @@ import { useChatWindowModule } from "../../modules/hooks/useChatWindowModule";
 
 function HeaderComponent(props: any) {
     const location = useLocation()
-
+    const noSidebarPaths = ['/settings', '/privacy','/terms']
     const logOut = () => {
         AuthenticationService.userLogout();
     }
@@ -17,7 +17,7 @@ function HeaderComponent(props: any) {
 
     return (
       
-            <nav className={`tyn-appbar ${location.pathname === "/settings" ? 'no-sidebar' : ''}`}>
+            <nav className={`tyn-appbar ${noSidebarPaths.includes(location.pathname) ? 'no-sidebar' : ''}`}>
                 <div className="tyn-appbar-wrap">
                     <div className="tyn-appbar-logo">
                         <span className="toggleIcon d-lg-none" onClick={handleShowHideSideBar}>

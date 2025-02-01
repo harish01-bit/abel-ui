@@ -1,1 +1,5 @@
-export const GeneralSettings = () => <>General Settings</>;
+export const GeneralSettings = () => {
+    return (
+        <>General Settings</>
+    )
+};

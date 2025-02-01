@@ -9,7 +9,29 @@ import { useState } from "react";
 export const SettingsModule = () => {
     const { userSettings, form, formError, isLoading, userSettingsData } = useSettingsModule()
     const navigate = useNavigate();
-    const [activeTab,setActiveTab] = useState('userSettings')
+    const [activeTab,setActiveTab] = useState('userSettings');
+    const items = [
+        {
+            id: "userSettings",
+            name: "User",
+        },
+        {
+            id: "general",
+            name: "General",
+        },
+        {
+            id: "personalize",
+            name: "Personalize",
+        },
+        {
+            id: "terms",
+            name: "Terms",
+        },
+        {
+            id: "privacy",
+            name: "Privacy",
+        },
+    ]
     const chatBehaviourSettings = [
         {
             id: 1, type: "Pastor"
@@ -19,21 +41,26 @@ export const SettingsModule = () => {
         },
     ]
     const tabClickHandler = (val:string) => {
-        setActiveTab(val)
+        if(val === 'terms'){
+            navigate("/terms");
+        }
+        else if(val === 'privacy'){
+            navigate("/privacy");
+        }else{
+            setActiveTab(val)
+        }
     }
     return (
         <div className="settings-wrapper">
         <div className="inner-wrapper">
             <ul className="nav">
-                <li className="nav-item">
-                    <a className={`nav-link ${activeTab === 'userSettings' ? 'active' : ''}`} aria-current="page" href="#" onClick={() => tabClickHandler('userSettings')}>User</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link ${activeTab === 'general' ? 'active' : ''}`} href="#" onClick={() => tabClickHandler('general')}>General</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link ${activeTab === 'personalize' ? 'active' : ''}`} href="#" onClick={() => tabClickHandler('personalize')}>Personalize</a>
-                </li>
+                {items.map(el => {
+                    return (
+                        <li className="nav-item">
+                            <a className={`nav-link ${activeTab === el.id ? 'active' : ''}`} aria-current="page" onClick={() => tabClickHandler(el.id)}>{el.name}</a>
+                        </li>        
+                    )
+                })}
             </ul>
             {
                 isLoading ? <></> : 

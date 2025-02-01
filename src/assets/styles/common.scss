@@ -27,3 +27,15 @@ body{
     font-size: 12px;
     margin-bottom: 10px;
 }
+.main-wrapper{
+    padding-top: 100px;
+    min-height: 100vh;
+    padding-bottom: 40px;
+    .inner-wrapper{
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+.bg-white{
+    background: #fff;
+}
