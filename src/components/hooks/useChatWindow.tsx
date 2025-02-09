@@ -28,7 +28,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         mutateAsync: sendMessage
     } = useSendMessageMutate();
 
-    
+
     useEffect(() => {
         connectToSignalR();
         return () => {
@@ -53,7 +53,8 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
             })
             .catch((err) => {
             });
-        connection.current.on("ReceiveResponse", (requestID: number, clientQueryModel: any) => {
+        connection.current.on("ReceiveResponse", (requestID: number, clientQueryModel: any, isCompleted: boolean) => {
+            clientQueryModel["isCompleted"] = isCompleted
             setChatResponse(clientQueryModel)
         });
     };
@@ -62,8 +63,8 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         if (curQueryID == chatResponse?.clientQueryID) {
 
             appendMessage(chatResponse?.response, "ai");
-
-            setIsProcessing(false);
+            if (chatResponse.isCompleted)
+                setIsProcessing(false);
         }
     }, [chatResponse, curQueryID]);
 
@@ -104,25 +105,43 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
 
     useEffect(() => {
-        
+
         if (querMasterID == 0) {
             setIsProcessing(false)
             setMessages([])
         }
         else {
-        
-            if(curQueryID==0)
-            getClientChatListWithMasterID();
+
+            if (curQueryID == 0)
+                getClientChatListWithMasterID();
         }
 
     }, [querMasterID])
-  
+
     const appendMessage = (message: string, sender: string) => {
+        if (sender === "user") {
+            // Always append user message at the start
+            setMessages((prevMessages) => [{ sender: sender, text: message }, ...prevMessages]);
+        } else if (sender === "ai") {
+        console.log(messages)
+            setMessages((prevMessages) => {
+                console.log(prevMessages[0])
+                // Check if the last message is from 'ai'
+                if (prevMessages.length > 0 && prevMessages[0].sender === "ai") {
+                    const updatedMessages = [...prevMessages];
+                    updatedMessages[0].text += ` ${message}`;
+                    return updatedMessages;
+                } else {
+                    console.log(message)
+                    return [{ sender: sender, text: message }, ...prevMessages]
+
+                }
+
+            });
+        }
+    };
 
 
-        setMessages((prevMessages) => [{ sender: sender, text: message }, ...prevMessages]);
-
-    }
     const handleSend = async (event: any) => {
         event.preventDefault();
         if (input.trim() === "") return;
@@ -144,7 +163,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
                 setQueryMasterID(sendMessageResponse?.clientQueryModel?.clientQueryMasterID)
 
             }
-           
+
             setCurQueryID(sendMessageResponse?.clientQueryModel?.clientQueryID)
             /*intervalId = setInterval(async () => {
                 PollMessageResponse(sendMessageResponse)
@@ -156,38 +175,6 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         }
 
     };
-    /* const PollMessageResponse = async (sendMessageResponse: any) => {
-         elapsedTime += pollingInterval;
-         const { clientQueryModel } = sendMessageResponse;
-         const res = await pollResponse({
-             userID: currentUser.userID,
-             tenantID: currentUser.tenantID,
-             queryMasterID: clientQueryModel.clientQueryMasterID, // 0 for new chat
-             queryID: clientQueryModel.clientQueryID,
-             queryType: queryType
- 
-         })
- 
-         if (res?.isSuccess) {
-             if (res?.clientQueryModel?.processStatus == 2) {
-                 clearInterval(intervalId);
-                 appendMessage(res?.clientQueryModel?.response, "ai");
-                 setIsProcessing(false);
-             }
- 
-         }
-         else {
-             clearInterval(intervalId);
-             appendMessage("Sorry, something went wrong!", "ai")
-             setIsProcessing(false);
- 
-         }
-         if (elapsedTime >= pollingDuration) {
-             clearInterval(intervalId);
-             appendMessage("No Response", "ai")
-             setIsProcessing(false);
-         }
- 
-     }*/
+
     return { messages, setMessages, handleSend, input, setInput, isProcessing }
 }
