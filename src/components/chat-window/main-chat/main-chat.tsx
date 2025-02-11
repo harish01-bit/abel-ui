@@ -23,11 +23,12 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
 
     const { handleSend, messages, setMessages, input, setInput, isProcessing } = useChatWindow({ querMasterID, setQueryMasterID, currentUser, queryType });
     const messageEndRef = useRef<HTMLDivElement | null>(null);
-
+    const messageContainerRef = useRef<HTMLDivElement | null>(null);
     // Scroll to the bottom whenever messages change
     useEffect(() => {
         messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
+
     return (
         <>
 
@@ -36,10 +37,11 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
 
 
                 <div className="chat-wrapper">
-                    <div className="message-container">
+                    <div className="message-container" ref={messageContainerRef}>
                         {chatBehaviour == 1 && 'Pastor'}
                         {chatBehaviour == 2 && 'Intelligent Book'}
                         <div className="message-wrapper">
+                        <div ref={messageEndRef}></div>
                             {messages.map((msg, index) => (
                                 <Fragment key={index}>
                                     {msg.sender == "user" && <ChatRequestComponent key={index} message={msg.text} />}
@@ -48,11 +50,13 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
                                 </Fragment>
 
                             ))}
-                            <div ref={messageEndRef}></div>
+                         
 
                         </div>
+                      
                     </div>
                 </div>
+               
                 <div className="query-box-container">
                     <div className="form-wrapper">
                         <div className="input-attachment">
