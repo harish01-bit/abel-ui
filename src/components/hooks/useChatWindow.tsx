@@ -62,7 +62,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
         if (curQueryID == chatResponse?.clientQueryID) {
 
-            appendMessage(chatResponse?.response, "ai");
+            appendMessage(chatResponse?.response, "ai",chatResponse?.isCompleted);
             if (chatResponse.isCompleted)
                 setIsProcessing(false);
         }
@@ -118,21 +118,24 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
     }, [querMasterID])
 
-    const appendMessage = (message: string, sender: string) => {
+    const appendMessage = (message: string, sender: string, isCompleted: boolean=true) => {
         if (sender === "user") {
             // Always append user message at the start
             setMessages((prevMessages) => [{ sender: sender, text: message }, ...prevMessages]);
         } else if (sender === "ai") {
-        console.log(messages)
+
             setMessages((prevMessages) => {
-                console.log(prevMessages[0])
+
                 // Check if the last message is from 'ai'
                 if (prevMessages.length > 0 && prevMessages[0].sender === "ai") {
                     const updatedMessages = [...prevMessages];
-                    updatedMessages[0].text += ` ${message}`;
+                    if (!isCompleted)
+                        updatedMessages[0].text += ` ${message}`;
+                    else
+                        updatedMessages[0].text = ` ${message}`;
                     return updatedMessages;
                 } else {
-                    console.log(message)
+
                     return [{ sender: sender, text: message }, ...prevMessages]
 
                 }

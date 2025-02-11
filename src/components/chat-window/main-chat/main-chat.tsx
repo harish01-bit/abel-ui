@@ -8,6 +8,7 @@ import { MdOutlineAttachment } from "react-icons/md";
 import ChatAudioResponseComponent from "./chat-audio-response/chat-audio-response";
 import AudioPlayerComponent from "../../ui-component/audio-player/audio-player";
 import HeaderComponent from "../../../layout/header/header";
+import { useEffect, useRef } from "react";
 
 type Props = {
     querMasterID: any
@@ -21,6 +22,12 @@ type Props = {
 function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryType, handleShowHideSideBar, chatBehaviour }: Props) {
 
     const { handleSend, messages, setMessages, input, setInput, isProcessing } = useChatWindow({ querMasterID, setQueryMasterID, currentUser, queryType });
+    const messageEndRef = useRef<HTMLDivElement | null>(null);
+
+    // Scroll to the bottom whenever messages change
+    useEffect(() => {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
     return (
         <>
 
@@ -41,7 +48,7 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
                                 </Fragment>
 
                             ))}
-
+                            <div ref={messageEndRef}></div>
 
                         </div>
                     </div>
