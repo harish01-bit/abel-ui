@@ -3,11 +3,8 @@ import { useChatWindow } from "../../hooks/useChatWindow";
 import IconComponent from "../../ui-component/icon/icon";
 import ChatRequestComponent from "./chat-request/chat-request";
 import ChatResponseComponent from "./chat-response/chat-response";
-import AuthHeaderComponent from "../../../layout/header/auth-header";
 import { MdOutlineAttachment } from "react-icons/md";
 import ChatAudioResponseComponent from "./chat-audio-response/chat-audio-response";
-import AudioPlayerComponent from "../../ui-component/audio-player/audio-player";
-import HeaderComponent from "../../../layout/header/header";
 
 type Props = {
     querMasterID: any

@@ -7,6 +7,7 @@ import { ForgotPasswordModule } from "../modules/user/forgot-password/forgot-pas
 import AudioChatPage from "../pages/audio/audio-chat";
 import { SettingsPage } from "../pages/settings/settings";
 import AuthHeaderComponent from "../layout/header/auth-header";
+import FooterComponent from "../layout/footer/footer";
 import Terms from "../pages/terms/terms";
 import Privacy from "../pages/privacy/privacy";
 
@@ -21,7 +22,7 @@ function AppRoute() {
         {
             path: '/',
             index: false,
-            element: <AuthHeaderComponent />,
+            element: <><AuthHeaderComponent/><FooterComponent/></>,
             children: [
                 {
                     path: 'chat',
