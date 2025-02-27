@@ -15,8 +15,7 @@ dl {
   --content-full-height: calc(100dvh - var(--appbar-height));
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
+  height: calc(100dvh - 70px);
   background: var(--bg);
 }
 
@@ -141,7 +140,7 @@ dl {
   width: 86px;
 }
 .tyn-aside-base {
-  height: 100vh;
+  height: calc(100vh - 70px);
 }
 .tyn-aside-head {
   padding: var(--aside-head-gap-y) var(--aside-gap-x) 0;
