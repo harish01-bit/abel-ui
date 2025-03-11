@@ -12,6 +12,12 @@
             align-items: flex-start;
         }
     }
+    footer{
+        text-align: center;}
+    .lnkfooter{color: rgb(185 187 191);
+        text-decoration: none;}
+    .lnkfooter:hover{color: rgb(53, 51, 51);
+            text-decoration: none;}
     .nav{
         display: flex;
         justify-content: center;

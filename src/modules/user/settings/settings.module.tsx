@@ -23,14 +23,14 @@ export const SettingsModule = () => {
             id: "personalize",
             name: "Personalize",
         },
-        {
-            id: "terms",
-            name: "Terms",
-        },
-        {
-            id: "privacy",
-            name: "Privacy",
-        },
+        // {
+        //     id: "terms",
+        //     name: "Terms",
+        // },
+        // {
+        //     id: "privacy",
+        //     name: "Privacy",
+        // },
     ]
     const chatBehaviourSettings = [
         {
@@ -70,6 +70,7 @@ export const SettingsModule = () => {
                 <></>
             }
         </div>
+        <footer><a href="terms" target="_blank" className="lnkfooter">Terms</a>&nbsp;|&nbsp;<a href="privacy" className="lnkfooter">Privacy</a></footer>
         </div>
     )
 }
