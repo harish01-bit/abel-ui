@@ -70,7 +70,7 @@ export const SettingsModule = () => {
                 <></>
             }
         </div>
-        <footer><a href="terms" target="_blank" className="lnkfooter">Terms</a>&nbsp;|&nbsp;<a href="privacy" className="lnkfooter">Privacy</a></footer>
+       
         </div>
     )
 }

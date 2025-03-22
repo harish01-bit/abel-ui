@@ -3,7 +3,7 @@ import NavigateLink from "../../components/ui-component/navigate-link/navigate-l
 import { AuthenticationService } from "../../helpers/authetication.service";
 import { MdMenu } from "react-icons/md";
 import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import HeaderComponent from "./header";
 
 function AuthHeaderComponent(props: any) {
@@ -17,8 +17,38 @@ function AuthHeaderComponent(props: any) {
                 <Suspense>
                     <Outlet></Outlet>
                 </Suspense>
+                <footer
+                    style={{
+                        backgroundColor: '#ffffff',         // White background
+                        padding: '1rem',
+                        textAlign: 'center',
+                        fontSize: '14px',
+                        marginTop: 'auto',
+                        borderTop: '1px solid #ddd'
+                    }}
+                >
+                    <Link
+                        to="/terms"
+                        className="lnkfooter"
+                        style={{ margin: '0 8px', color: '#333', textDecoration: 'none' }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Terms and Conditions
+                    </Link>
+                  
+                    <Link
+                        to="/privacy"
+                        className="lnkfooter"
+                        style={{ margin: '0 8px', color: '#333', textDecoration: 'none' }}
+                    >
+                        Privacy Policy
+                    </Link>
+                </footer>
             </div>
+
         </div>
+
     )
 }
 
