@@ -9,14 +9,39 @@ import { SettingsPage } from "../pages/settings/settings";
 import AuthHeaderComponent from "../layout/header/auth-header";
 import Terms from "../pages/terms/terms";
 import Privacy from "../pages/privacy/privacy";
+import UnAuthHeaderComponent from "../layout/header/unauth-header";
 
 
 function AppRoute() {
     return useRoutes([
+
         {
-            path: '/login',
-            index: true,
-            element: <LoginPage />,
+            path: '/',
+            index: false,
+            element: <UnAuthHeaderComponent />,
+            children: [
+                {
+                    path: '/',
+                    index: false,
+                    element: <LoginPage />,
+                },
+                {
+                    path: '/login',
+                    index: false,
+                    element: <LoginPage />,
+                },
+                {
+                    path: '/terms',
+                    index: false,
+                    element: <Terms />,
+                },
+                {
+                    path: '/privacy',
+                    index: false,
+                    element: <Privacy />,
+                },
+            ]
+
         },
         {
             path: '/',
@@ -38,16 +63,7 @@ function AppRoute() {
                     index: false,
                     element: <AudioChatPage />,
                 },
-                {
-                    path: '/terms',
-                    index: true,
-                    element: <Terms />,
-                },
-                {
-                    path: '/privacy',
-                    index: true,
-                    element: <Privacy />,
-                }
+
             ]
         },
         {

@@ -22,11 +22,11 @@ type Props = {
 function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryType, handleShowHideSideBar, chatBehaviour }: Props) {
 
     const { handleSend, messages, setMessages, input, setInput, isProcessing } = useChatWindow({ querMasterID, setQueryMasterID, currentUser, queryType });
-    const messageEndRef = useRef<HTMLDivElement | null>(null);
-    const messageContainerRef = useRef<HTMLDivElement | null>(null);
+    const latestAIResponseRef  = useRef<HTMLDivElement | null>(null);
+  
     // Scroll to the bottom whenever messages change
     useEffect(() => {
-        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        latestAIResponseRef?.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
     return (
@@ -37,26 +37,39 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
 
 
                 <div className="chat-wrapper">
-                    <div className="message-container" ref={messageContainerRef}>
+                    <div className="message-container">
                         {chatBehaviour == 1 && 'Pastor'}
                         {chatBehaviour == 2 && 'Intelligent Book'}
                         <div className="message-wrapper">
-                        <div ref={messageEndRef}></div>
-                            {messages.map((msg, index) => (
-                                <Fragment key={index}>
-                                    {msg.sender == "user" && <ChatRequestComponent key={index} message={msg.text} />}
-                                    {msg.sender == "ai" && queryType == 1 && <ChatResponseComponent key={index} message={msg.text} />}
-                                    {msg.sender == "ai" && queryType == 2 && <ChatAudioResponseComponent message={msg.text} />}
-                                </Fragment>
+                           
+                            {messages.map((msg, index) => {
+                                const isLast = index === messages.length - 1;
+                                const isAI = msg.sender === "ai";
 
-                            ))}
-                         
+                                return (
+                                    <Fragment key={index}>
+                                        {msg.sender === "user" && (
+                                            <ChatRequestComponent key={index} message={msg.text} />
+                                        )}
+                                        {isAI && queryType === 1 && (
+                                            <div ref={isLast ? latestAIResponseRef : null}>
+                                                <ChatResponseComponent message={msg.text} />
+                                            </div>
+                                        )}
+                                        {isAI && queryType === 2 && (
+                                            <div ref={isLast ? latestAIResponseRef : null}>
+                                                <ChatAudioResponseComponent message={msg.text} />
+                                            </div>
+                                        )}
+                                    </Fragment>
+                                );
+                            })}
 
                         </div>
-                      
+
                     </div>
                 </div>
-               
+
                 <div className="query-box-container">
                     <div className="form-wrapper">
                         <div className="input-attachment">

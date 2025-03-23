@@ -22,15 +22,7 @@ export const SettingsModule = () => {
         {
             id: "personalize",
             name: "Personalize",
-        },
-        // {
-        //     id: "terms",
-        //     name: "Terms",
-        // },
-        // {
-        //     id: "privacy",
-        //     name: "Privacy",
-        // },
+        }
     ]
     const chatBehaviourSettings = [
         {
