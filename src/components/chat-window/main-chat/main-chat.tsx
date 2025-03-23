@@ -26,6 +26,7 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
   
     // Scroll to the bottom whenever messages change
     useEffect(() => {
+        console.log(latestAIResponseRef)
         latestAIResponseRef?.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
@@ -43,25 +44,26 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
                         <div className="message-wrapper">
                            
                             {messages.map((msg, index) => {
-                                const isLast = index === messages.length - 1;
+                                const isLast = index === 0;
                                 const isAI = msg.sender === "ai";
 
                                 return (
-                                    <Fragment key={index}>
+                                    <div ref={isLast ? latestAIResponseRef : null} key={index}>
                                         {msg.sender === "user" && (
+                                            
                                             <ChatRequestComponent key={index} message={msg.text} />
                                         )}
                                         {isAI && queryType === 1 && (
-                                            <div ref={isLast ? latestAIResponseRef : null}>
+                                           
                                                 <ChatResponseComponent message={msg.text} />
-                                            </div>
+                                          
                                         )}
                                         {isAI && queryType === 2 && (
-                                            <div ref={isLast ? latestAIResponseRef : null}>
+                                           
                                                 <ChatAudioResponseComponent message={msg.text} />
-                                            </div>
+                                            
                                         )}
-                                    </Fragment>
+                                    </div>
                                 );
                             })}
 
