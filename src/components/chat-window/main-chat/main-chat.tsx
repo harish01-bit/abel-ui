@@ -26,9 +26,9 @@ function MainChatComponent({ querMasterID, setQueryMasterID, currentUser, queryT
   
     // Scroll to the bottom whenever messages change
     useEffect(() => {
-        console.log(latestAIResponseRef)
+     
         latestAIResponseRef?.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
+    }, [messages.length]);
 
     return (
         <>
