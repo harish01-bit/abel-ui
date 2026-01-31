@@ -51,6 +51,7 @@ export const useLoginModule = () => {
                 userEmail: values.userEmail,
                 password: values.password
             })
+            console.log("Login response:", res);
             if (res?.isSuccess) {
 
                 if (res.error == "otp send") {

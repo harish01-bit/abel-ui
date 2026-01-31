@@ -18,3 +18,4 @@ root.render(
   </QueryClientProvider>
 );
 
+export { root };

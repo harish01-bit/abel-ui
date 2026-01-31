@@ -15,8 +15,8 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
     const connection = useRef<HubConnection | null>(null);
     const service = new ChatApiService();
 
-    const pollingInterval = 1000; // 1 second
-    const pollingDuration = 5 * 60 * 1000; // 5 minutes
+    const pollingInterval = 100; // 100 millisecond
+    const pollingDuration = 60000; // 5 minutes
 
     let elapsedTime = 0;
     let pollingCompleted = false;
@@ -48,7 +48,7 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
         connection.current
             .start()
             .then(() => {
-                connection.current?.invoke("JoinGroup", queryType == 1 ? "Text" : "Audio");
+                connection.current?.invoke("JoinGroup", queryType === 1 ? "Text" : "Audio");
 
             })
             .catch((err) => {
@@ -58,15 +58,32 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
             setChatResponse(clientQueryModel)
         });
     };
+    // console.log("chatResponse:", chatResponse);
+    // console.log("curQueryID:", curQueryID);
     useEffect(() => {
 
         if (curQueryID == chatResponse?.clientQueryID) {
 
-            appendMessage(chatResponse?.response, "ai",chatResponse?.isCompleted);
-            if (chatResponse.isCompleted)
-                setIsProcessing(false);
+                appendMessage(chatResponse?.response, "ai", chatResponse?.isCompleted);
+                if (chatResponse.isCompleted)
+                    setIsProcessing(false);
         }
     }, [chatResponse, curQueryID]);
+    // console.log("chatResponse:", chatResponse);
+    // console.log("curQueryID:", curQueryID);
+    // useEffect(() => {
+    // if (curQueryID === chatResponse?.clientQueryID) {
+    //     console.log("Processing chatResponse:", chatResponse.processStatus);
+    //     if (chatResponse.processStatus === 4) {
+    //     appendMessage(chatResponse?.response, "ai", chatResponse?.isCompleted);
+
+    //     if (chatResponse?.isCompleted) setIsProcessing(false);
+    //     } else if (chatResponse.processStatus === 5) {
+    //     appendMessage("We cannot process this request now", "ai", true);
+    //     setIsProcessing(false);
+    //     }
+    // }
+    // }, [chatResponse, curQueryID]);
 
     const {
         mutateAsync: getClientChatList
@@ -106,19 +123,19 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
 
     useEffect(() => {
 
-        if (querMasterID == 0) {
+        if (querMasterID === 0) {
             setIsProcessing(false)
             setMessages([])
         }
         else {
 
-            if (curQueryID == 0)
+            if (curQueryID === 0)
                 getClientChatListWithMasterID();
         }
 
     }, [querMasterID])
 
-    const appendMessage = (message: string, sender: string, isCompleted: boolean=true) => {
+    const appendMessage = (message: string, sender: string, isCompleted: boolean = true) => {
         if (sender === "user") {
             // Always append user message at the start
             setMessages((prevMessages) => [{ sender: sender, text: message }, ...prevMessages]);
@@ -156,13 +173,13 @@ export const useChatWindow = ({ querMasterID, setQueryMasterID, currentUser, que
             userID: currentUser?.userID,
             queryMasterID: querMasterID,
             query: input,
-            title: "Able Message",
+            title: "Abel Message",
 
             queryType: queryType
         })
 
         if (sendMessageResponse?.isSuccess) {
-            if (querMasterID == 0) {
+            if (querMasterID === 0) {
                 setQueryMasterID(sendMessageResponse?.clientQueryModel?.clientQueryMasterID)
 
             }

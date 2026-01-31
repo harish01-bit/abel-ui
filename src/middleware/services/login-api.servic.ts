@@ -13,6 +13,7 @@ export class LoginApiService {
                 body: JSON.stringify(request)
             });
             const data = await res.json();
+            console.log("AuthenticateUser response data:", data);
             if (data?.isSuccess) {
 
                 return data;
